@@ -34,14 +34,16 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function __construct () {
 			add_action( 'admin_menu', array($this, 'menu') );
 			add_action( 'admin_init', array($this, 'init') );
+			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
+			add_action( 'plugins_loaded', array($this, 'check') );
 		}
 
 		function menu () {
-			add_submenu_page( 'tools.php', 'Show Site by IP', 'Show Site by IP', 'manage_options', 'wp_show_site_by_ip', array($this, 'page') );
+			add_submenu_page( 'tools.php', 'Show Site by IP', 'Show Site by IP', 'manage_options', 'wssbi', array($this, 'page') );
 		}
 
 		function init () {
-			register_setting( 'wssbiPage', 'wssbi_settings', array($this, 'sanitize') );
+			register_setting( 'wssbiPage', 'wssbi_settings', array($this, 'save') );
 		}
 
 		function page () {
@@ -58,31 +60,67 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 					<table class="form-table">
 						<tr valign="top">
-							<th scope="row"><?php _e('Title', 'wssbi'); ?></th>
-							<td>
-								<input type="text" name="wssbi_settings[title]" value="<?php echo $options['title']; ?>" class="regular-text" />
-								<p class="description"><?php _e('Title of the temporary page', 'wssbi'); ?></p>
-							</td>
-						</tr>
-						<tr valign="top">
 							<th scope="row"><?php _e('HTML', 'wssbi'); ?></th>
 							<td>
-								<textarea cols="50" rows="20" name="wssbi_settings[html]" class="large-text code"><?php echo $options['html']; ?></textarea>
-								<p class="description"><?php _e('HTML content of the temporary page', 'wssbi'); ?></p>
+								<textarea cols="50" rows="20" id="wssbi_html" name="wssbi_settings[html]" class="large-text code"><?php echo $options['html']; ?></textarea>
+								<p class="description"><?php _e('Full HTML content of the temporary page', 'wssbi'); ?></p>
 							</td>
 						</tr>
-					</table>	
+					</table>
 
 					<?php submit_button(); ?>
 
 				</form>
 			</div>
+			<script>
+			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("wssbi_html"), {
+				lineNumbers: true,
+				mode: "htmlmixed"
+			});
+			</script>
 		
 		<?php
 		}
 
-		function sanitize ( $input ) {
+		function scripts ( $hook ) {
+			if ('tools_page_wssbi' != $hook )
+				return;
+			$cdn = '//cdn.jsdelivr.net/codemirror/4.5.0/';
+			wp_enqueue_style( 'codemirror', $cdn.'codemirror.css' );
+			wp_enqueue_script( 'codemirror-js', $cdn.'codemirror.min.js' );
+			wp_enqueue_script( 'codemirror-xml', $cdn.'mode/xml/xml.js' );
+			wp_enqueue_script( 'codemirror-cssjs', $cdn.'mode/css/css.js' );
+			wp_enqueue_script( 'codemirror-javascript', $cdn.'mode/javascript/javascript.js' );
+			wp_enqueue_script( 'codemirror-htmlmixed', $cdn.'mode/htmlmixed/htmlmixed.js' );
+		}
+
+		function save ( $input ) {
+			$options = wp_parse_args(get_option('wssbi_settings'), array( 'ips' => array() ));
+			$input['ips'] = $options['ips'];
 			return $input;
+		}
+
+		function check () {
+			$ip = $_SERVER['REMOTE_ADDR'];
+			$options = wp_parse_args(
+				get_option('wssbi_settings'),
+				array(
+					'ips'  => array(),
+					'html' => ''
+				)
+			);
+			if(isset($_GET['new']) && !in_array($ip, $options['ips']))
+				$options['ips'] []= $ip;
+			if(isset($_GET['old']) && in_array($ip, $options['ips'])){
+				$key = array_search($ip, $options['ips']);
+				if($key!==false)
+					unset($options['ips'][$key]);
+			}
+			update_option( 'wssbi_settings', $options );
+			if(!in_array($ip, $options['ips'])) {
+				echo $options['html'];
+				die();
+			}
 		}
 
 	}
