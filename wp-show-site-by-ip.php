@@ -39,7 +39,14 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		}
 
 		function menu () {
-			add_submenu_page( 'tools.php', 'Show Site by IP', 'Show Site by IP', 'manage_options', 'wssbi', array($this, 'page') );
+			add_submenu_page(
+				'tools.php',
+				_x('Show Site by IP', 'page title', 'wssbi'),
+				_x('Show Site by IP', 'menu title', 'wssbi'),
+				'manage_options',
+				'wssbi',
+				array($this, 'page')
+			);
 		}
 
 		function init () {
