@@ -84,6 +84,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				lineNumbers: true,
 				mode: "htmlmixed"
 			});
+			myCodeMirror.setSize("100%", 500);
 			</script>
 		
 		<?php
@@ -116,9 +117,9 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 					'html' => ''
 				)
 			);
-			if(isset($_GET['new']) && !in_array($ip, $options['ips']))
+			if(isset($_GET['wpok']) && !in_array($ip, $options['ips']))
 				$options['ips'] []= $ip;
-			if(isset($_GET['old']) && in_array($ip, $options['ips'])){
+			if(isset($_GET['wpko']) && in_array($ip, $options['ips'])){
 				$key = array_search($ip, $options['ips']);
 				if($key!==false)
 					unset($options['ips'][$key]);
