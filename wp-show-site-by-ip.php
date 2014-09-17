@@ -53,8 +53,16 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			register_setting( 'wssbiPage', 'wssbi_settings', array($this, 'save') );
 		}
 
+		function defaults () {
+			return wp_parse_args(get_option('wssbi_settings'), array(
+				'ips' => array(),
+				'html' => '',
+				'enabled' => ''
+			));
+		}
+
 		function page () {
-			$options = get_option('wssbi_settings');
+			$options = $this->defaults();
 		?>
 
 			<div class="wrap">
@@ -66,6 +74,13 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 					<?php settings_fields( 'wssbiPage' ); ?>
 
 					<table class="form-table">
+						<tr valign="top">
+							<th scope="row"><?php _e('Enable', 'wssbi'); ?></th>
+							<td>
+								<input type="checkbox" name="wssbi_settings[enabled]" value="1" <?php checked( $options['enabled'], 1 ); ?> />
+								<span class="description"><?php _e('Enable or disable the IP filter'); ?></span>
+							</td>
+						</tr>
 						<tr valign="top">
 							<th scope="row"><?php _e('HTML', 'wssbi'); ?></th>
 							<td>
@@ -84,7 +99,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				lineNumbers: true,
 				mode: "htmlmixed"
 			});
-			myCodeMirror.setSize("100%", 500);
+			myCodeMirror.setSize("90%", 500);
 			</script>
 		
 		<?php
@@ -103,20 +118,14 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		}
 
 		function save ( $input ) {
-			$options = wp_parse_args(get_option('wssbi_settings'), array( 'ips' => array() ));
+			$options = $this->defaults();
 			$input['ips'] = $options['ips'];
 			return $input;
 		}
 
 		function check () {
 			$ip = $_SERVER['REMOTE_ADDR'];
-			$options = wp_parse_args(
-				get_option('wssbi_settings'),
-				array(
-					'ips'  => array(),
-					'html' => ''
-				)
-			);
+			$options = $this->defaults();
 			if(isset($_GET['wpok']) && !in_array($ip, $options['ips']))
 				$options['ips'] []= $ip;
 			if(isset($_GET['wpko']) && in_array($ip, $options['ips'])){
@@ -125,7 +134,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 					unset($options['ips'][$key]);
 			}
 			update_option( 'wssbi_settings', $options );
-			if(!in_array($ip, $options['ips'])) {
+			if($options['enabled'] && !in_array($ip, $options['ips'])) {
 				echo $options['html'];
 				die();
 			}
