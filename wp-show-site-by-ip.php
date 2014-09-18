@@ -108,13 +108,13 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function scripts ( $hook ) {
 			if ('tools_page_wssbi' != $hook )
 				return;
-			$cdn = '//cdn.jsdelivr.net/codemirror/4.5.0/';
-			wp_enqueue_style( 'codemirror', $cdn.'codemirror.css' );
-			wp_enqueue_script( 'codemirror-js', $cdn.'codemirror.min.js' );
-			wp_enqueue_script( 'codemirror-xml', $cdn.'mode/xml/xml.js' );
-			wp_enqueue_script( 'codemirror-cssjs', $cdn.'mode/css/css.js' );
-			wp_enqueue_script( 'codemirror-javascript', $cdn.'mode/javascript/javascript.js' );
-			wp_enqueue_script( 'codemirror-htmlmixed', $cdn.'mode/htmlmixed/htmlmixed.js' );
+			$path = 'lib/codemirror-4.5/';
+			wp_enqueue_style( 'codemirror', plugins_url( $path.'codemirror.min.css', __FILE__ ) );
+			wp_enqueue_script( 'codemirror-js', plugins_url( $path.'codemirror.min.js', __FILE__ ) );
+			wp_enqueue_script( 'codemirror-xml', plugins_url( $path.'mode/xml.min.js', __FILE__ ) );
+			wp_enqueue_script( 'codemirror-cssjs', plugins_url( $path.'mode/css.min.js', __FILE__ ) );
+			wp_enqueue_script( 'codemirror-javascript', plugins_url( $path.'mode/javascript.min.js', __FILE__ ) );
+			wp_enqueue_script( 'codemirror-htmlmixed', plugins_url( $path.'mode/htmlmixed.min.js', __FILE__ ) );
 		}
 
 		function save ( $input ) {
