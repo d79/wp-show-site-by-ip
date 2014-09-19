@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Show Site by IP
-Plugin URI: https://github.com/d79/wp-show-site-by-ip
+Plugin URI: https://wordpress.org/plugins/wp-show-site-by-ip/
 Description: Hide the website to unknown IPs and show a temporary page instead
 Version: 1.0
 Author: Dario Candelù
