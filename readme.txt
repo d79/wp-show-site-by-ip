@@ -31,15 +31,30 @@ That link open the plugin configuration page, where you can upload the full HTML
 **Once enabled the IP filter you won't be able to see your website!**
 
 To allow the access to your website from your internet connection add the string `?wpok` to the URL, like this:
-* `http://www.your-site.com/path/to/the/page?wpok`
+
+* `http://www.your-site.com?wpok`
 
 To remove your IP from the whitelist (and then go back to see the temporary page instead of your website) add the string `?wpko` to the URL, like this:
-* `http://www.your-site.com/path/to/the/page?wpko`
+
+* `http://www.your-site.com?wpko`
+
+That's it. =)
 
 == Installation ==
 
-1. Upload `wp-show-site-by-ip.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+= Automatic installation =
+
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To do an automatic install of this plugin, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
+
+In the search field type the title of this plugin and click Search Plugins. Once you’ve found it you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
+
+= Manual installation =
+
+The manual installation method involves downloading the plugin and uploading it to your webserver via your favourite FTP application. The WordPress codex contains [instructions on how to do this here] (http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
+
+= Activation =
+
+Once it's installed, you can activate the plugin clicking “Activete Now”
 
 == Changelog ==
 
