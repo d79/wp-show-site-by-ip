@@ -36,6 +36,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			add_action( 'admin_init', array($this, 'init') );
 			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
 			add_action( 'plugins_loaded', array($this, 'check') );
+			add_action( 'plugin_action_links_' . plugin_basename(__FILE__), array($this, 'link2settings') );
 		}
 
 		function menu () {
@@ -69,6 +70,12 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 				<h2><?php _e('Show Site by IP', 'wssbi'); ?></h2>
 
+				<div class="update-nag" style="display:block">
+					<h4><?php _e('Warning: once enabled the IP filter you could not be able to see your website!', 'wssbi'); ?></h4>
+					<p><?php printf(__('To allow the access to your website from your internet connection add the string <code>?wpok</code> to the website URL, like this: <br> <code>http://%s?wpok</code>', 'wssbi'), $_SERVER['SERVER_NAME']); ?></p>
+					<p><?php printf(__('To remove your IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string <code>?wpko</code> to the website URL, like this: <br> <code>http://%s?wpko</code>', 'wssbi'), $_SERVER['SERVER_NAME']); ?></p>
+				</div>
+
 				<form action="options.php" method="post">				
 					
 					<?php settings_fields( 'wssbiPage' ); ?>
@@ -77,8 +84,10 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 						<tr valign="top">
 							<th scope="row"><?php _e('Enable', 'wssbi'); ?></th>
 							<td>
-								<input type="checkbox" name="wssbi_settings[enabled]" value="1" <?php checked( $options['enabled'], 1 ); ?> />
-								<span class="description"><?php _e('Enable or disable the IP filter'); ?></span>
+								<label for="wssbi_settings[enabled]">
+									<input type="checkbox" name="wssbi_settings[enabled]" value="1" <?php checked( $options['enabled'], 1 ); ?> />
+									<?php _e('Enable or disable the IP filter', 'wssbi'); ?>
+								</label>
 							</td>
 						</tr>
 						<tr valign="top">
@@ -140,10 +149,14 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			}
 		}
 
-	}
-}
+		function link2settings( $links ) {
+			array_unshift( $links, '<a href="'. get_admin_url(null, 'tools.php?page=wssbi') .'">'.__('Settings').'</a>' );
+			return $links;
+		}
 
-if(class_exists('WP_Show_Site_by_IP')) {
+	} // class end
+
 	// instantiate the plugin class
 	new WP_Show_Site_by_IP();
+
 }

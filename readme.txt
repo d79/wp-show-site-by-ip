@@ -30,11 +30,11 @@ That link open the plugin configuration page, where you can upload the full HTML
 
 **Once enabled the IP filter you won't be able to see your website!**
 
-To allow the access to your website from your internet connection add the string `?wpok` to the URL, like this:
+To allow the access to your website from your internet connection add the string `?wpok` to the website URL, like this:
 
 * `http://www.your-site.com?wpok`
 
-To remove your IP from the whitelist (and then go back to see the temporary page instead of your website) add the string `?wpko` to the URL, like this:
+To remove your IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string `?wpko` to the website URL, like this:
 
 * `http://www.your-site.com?wpko`
 
@@ -54,9 +54,13 @@ The manual installation method involves downloading the plugin and uploading it 
 
 = Activation =
 
-Once it's installed, you can activate the plugin clicking “Activete Now”
+Once it's installed, you can activate the plugin clicking “Activate Now”
 
 == Changelog ==
 
-= 1.0 =
-Plugin file created
+= 1.1 - 17.02.2015 =
+* Added link to the plugin settings
+* Added warning with instructions
+
+= 1.0 - 19.09.2014 =
+* Plugin file created
