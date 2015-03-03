@@ -3,7 +3,7 @@
 Plugin Name: WP Show Site by IP
 Plugin URI: https://wordpress.org/plugins/wp-show-site-by-ip/
 Description: Hide the website to unknown IPs and show a temporary page instead
-Version: 1.0
+Version: 1.2
 Author: Dario Candelù
 Author URI: http://www.spaziosputnik.it
 License: GPL2
@@ -144,6 +144,8 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			}
 			update_option( 'wssbi_settings', $options );
 			if($options['enabled'] && !in_array($ip, $options['ips'])) {
+				header('HTTP/1.1 503 Service Temporarily Unavailable');
+				header('Retry-After: 3600');
 				echo $options['html'];
 				die();
 			}
