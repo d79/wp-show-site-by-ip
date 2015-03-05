@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== WP Show Site by IP ===
 Contributors: d79
 Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
