@@ -3,7 +3,7 @@
 Plugin Name: WP Show Site by IP
 Plugin URI: https://wordpress.org/plugins/wp-show-site-by-ip/
 Description: Hide the website to unknown IPs and show a temporary page instead
-Version: 1.2
+Version: 1.3
 Author: Dario Candelù
 Author URI: http://www.spaziosputnik.it
 License: GPL2
@@ -56,9 +56,10 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function defaults () {
 			return wp_parse_args(get_option('wssbi_settings'), array(
-				'ips' => array(),
-				'html' => '',
-				'enabled' => ''
+				'ips'     => array(),
+				'html'    => '',
+				'enabled' => '',
+				'http'    => 503
 			));
 		}
 
@@ -87,6 +88,15 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 								<label for="wssbi_settings[enabled]">
 									<input type="checkbox" name="wssbi_settings[enabled]" value="1" <?php checked( $options['enabled'], 1 ); ?> />
 									<?php _e('Enable or disable the IP filter', 'wssbi'); ?>
+								</label>
+							</td>
+						</tr>
+						<tr valign="top">
+							<th scope="row"><?php _e('HTTP Status', 'wssbi'); ?></th>
+							<td>
+								<label for="wssbi_settings[http]">
+									<input type="text" name="wssbi_settings[http]" maxlength="3" size="3" value="<?php echo $options['http']; ?>">
+									<?php _e('Choose the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">HTTP Status code</a> for the temporary page. Default is <abbr title="The server is currently unavailable (because it is overloaded or down for maintenance). Generally, this is a temporary state.">503</abbr>.', 'wssbi'); ?>
 								</label>
 							</td>
 						</tr>
@@ -129,6 +139,10 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function save ( $input ) {
 			$options = $this->defaults();
 			$input['ips'] = $options['ips'];
+			$input['html'] = esc_html($input['html']);
+			$input['http'] = (int) $input['http'];
+			if( ! ($input['http']>100 && $input['http']<600) )
+				$input['http'] = 503;
 			return $input;
 		}
 
@@ -144,9 +158,9 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			}
 			update_option( 'wssbi_settings', $options );
 			if($options['enabled'] && !in_array($ip, $options['ips'])) {
-				header('HTTP/1.1 503 Service Temporarily Unavailable');
+				header('HTTP/1.1 '.$options['http']);
 				header('Retry-After: 3600');
-				echo $options['html'];
+				echo wp_specialchars_decode($options['html']);
 				die();
 			}
 		}
