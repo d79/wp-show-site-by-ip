@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Show Site by IP\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Mon Oct 12 2015 18:11:52 GMT+0200 (ora solare Europa "
+"occidentale)\n"
+"PO-Revision-Date: Mon Oct 12 2015 18:17:03 GMT+0200 (ora solare Europa "
+"occidentale)\n"
+"Last-Translator: admin <d@d79.it>\n"
+"Language-Team: \n"
+"Language: Italian\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: it_IT"
+
+#. Name of the plugin
+msgid "WP Show Site by IP"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/wp-show-site-by-ip"
+msgstr ""
+
+#. Description of the plugin
+msgid "Hide the website to unknown IPs and show a temporary page instead"
+msgstr "Nascondi il sito a IP sconosciuti e al suo posto mostra una pagina temporanea"
+
+#. Author of the plugin
+msgid "Dario Candelù"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.spaziosputnik.it"
+msgstr ""
+
+#: wp-show-site-by-ip.php:46
+msgctxt "page title"
+msgid "Show Site by IP"
+msgstr "Mostra sito per IP"
+
+#: wp-show-site-by-ip.php:47
+msgctxt "menu title"
+msgid "Show Site by IP"
+msgstr "Mostra sito per IP"
+
+#: wp-show-site-by-ip.php:73
+msgid "Show Site by IP"
+msgstr "Mostra sito per IP"
+
+#: wp-show-site-by-ip.php:76
+msgid ""
+"Warning: once enabled the IP filter you could not be able to see your "
+"website!"
+msgstr ""
+
+#: wp-show-site-by-ip.php:77
+#, php-format
+msgid ""
+"To allow the access to your website from your internet connection add the "
+"string <code>?wpok</code> to the website URL, like this: <br> <code>http:"
+"//%s?wpok</code>"
+msgstr ""
+
+#: wp-show-site-by-ip.php:78
+#, php-format
+msgid ""
+"To remove your IP from the whitelist afterwards (and then go back to see the "
+"temporary page instead of your website) add the string <code>?wpko</code> to "
+"the website URL, like this: <br> <code>http://%s?wpko</code>"
+msgstr ""
+
+#: wp-show-site-by-ip.php:87
+msgid "Enable"
+msgstr "Abilita"
+
+#: wp-show-site-by-ip.php:91
+msgid "Enable or disable the IP filter"
+msgstr "Abilita o disabilita il filtro IP"
+
+#: wp-show-site-by-ip.php:96
+msgid "HTTP Status"
+msgstr "Codice stato HTTP"
+
+#: wp-show-site-by-ip.php:100
+msgid ""
+"Choose the <a href=\"https://en.wikipedia.org/wiki/List_of_HTTP_status_codes\" "
+"target=\"_blank\">HTTP Status code</a> for the temporary page. Default is "
+"<abbr title=\"The server is currently unavailable (because it is overloaded "
+"or down for maintenance). Generally, this is a temporary state.\">503</abbr>."
+msgstr ""
+"Scegli il codice stato HTTP per la pagina temporanea. Il valore predefinito "
+"è 503."
+
+#: wp-show-site-by-ip.php:105
+msgid "HTML"
+msgstr ""
+
+#: wp-show-site-by-ip.php:108
+msgid "Full HTML content of the temporary page"
+msgstr "Contenuto HTML completo della pagina temporanea"
+
+#: wp-show-site-by-ip.php:170
+msgid "Settings"
+msgstr "Impostazioni"

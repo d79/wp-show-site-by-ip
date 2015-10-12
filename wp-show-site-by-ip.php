@@ -37,6 +37,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
 			add_action( 'plugins_loaded', array($this, 'check') );
 			add_action( 'plugin_action_links_' . plugin_basename(__FILE__), array($this, 'link2settings') );
+			add_action( 'plugins_loaded', array($this, 'languages') );
 		}
 
 		function menu () {
@@ -168,6 +169,10 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function link2settings( $links ) {
 			array_unshift( $links, '<a href="'. get_admin_url(null, 'tools.php?page=wssbi') .'">'.__('Settings').'</a>' );
 			return $links;
+		}
+
+		function languages() {
+			load_plugin_textdomain( 'wssbi', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 		}
 
 	} // class end
