@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Mon Oct 12 2015 18:11:52 GMT+0200 (ora solare Europa "
 "occidentale)\n"
-"PO-Revision-Date: Mon Oct 12 2015 18:17:03 GMT+0200 (ora solare Europa "
+"PO-Revision-Date: Tue Nov 17 2015 05:29:47 GMT+0100 (ora solare Europa "
 "occidentale)\n"
 "Last-Translator: admin <d@d79.it>\n"
 "Language-Team: \n"
@@ -32,10 +32,6 @@ msgstr ""
 msgid "https://wordpress.org/plugins/wp-show-site-by-ip"
 msgstr ""
 
-#. Description of the plugin
-msgid "Hide the website to unknown IPs and show a temporary page instead"
-msgstr "Nascondi il sito a IP sconosciuti e al suo posto mostra una pagina temporanea"
-
 #. Author of the plugin
 msgid "Dario Candelù"
 msgstr ""
@@ -44,55 +40,71 @@ msgstr ""
 msgid "http://www.spaziosputnik.it"
 msgstr ""
 
-#: wp-show-site-by-ip.php:46
+#: ../wp-show-site-by-ip.php:105
+msgid "HTML"
+msgstr ""
+
+#. Description of the plugin
+msgid "Hide the website to unknown IPs and show a temporary page instead"
+msgstr "Nascondi il sito a IP sconosciuti e al suo posto mostra una pagina temporanea"
+
+#: ../wp-show-site-by-ip.php:46
 msgctxt "page title"
 msgid "Show Site by IP"
 msgstr "Mostra sito per IP"
 
-#: wp-show-site-by-ip.php:47
+#: ../wp-show-site-by-ip.php:47
 msgctxt "menu title"
 msgid "Show Site by IP"
 msgstr "Mostra sito per IP"
 
-#: wp-show-site-by-ip.php:73
+#: ../wp-show-site-by-ip.php:73
 msgid "Show Site by IP"
 msgstr "Mostra sito per IP"
 
-#: wp-show-site-by-ip.php:76
+#: ../wp-show-site-by-ip.php:76
 msgid ""
 "Warning: once enabled the IP filter you could not be able to see your "
 "website!"
 msgstr ""
+"Attenzione: una volta abilitato il filtro IP potresti non essere in grado di "
+"vedere il tuo sito!"
 
-#: wp-show-site-by-ip.php:77
+#: ../wp-show-site-by-ip.php:77
 #, php-format
 msgid ""
 "To allow the access to your website from your internet connection add the "
 "string <code>?wpok</code> to the website URL, like this: <br> <code>http:"
 "//%s?wpok</code>"
 msgstr ""
+"Per abilitare l'accesso al tuo sito dalla tua connessione internet aggiungi "
+"la stringa <code>?wpok</code> all'URL, ad esempio così: <br> <code>http://%s?"
+"wpok</code>"
 
-#: wp-show-site-by-ip.php:78
+#: ../wp-show-site-by-ip.php:78
 #, php-format
 msgid ""
 "To remove your IP from the whitelist afterwards (and then go back to see the "
 "temporary page instead of your website) add the string <code>?wpko</code> to "
 "the website URL, like this: <br> <code>http://%s?wpko</code>"
 msgstr ""
+"Per rimuovere il tuo IP dalla whitelist successivamente (e tornare a vedere "
+"la pagina HTML temporanea invece del sito) aggiungi la stringa <code>?"
+"wpko</code> all'URL, ad esempio così: <br> <code>http://%s?wpko</code>"
 
-#: wp-show-site-by-ip.php:87
+#: ../wp-show-site-by-ip.php:87
 msgid "Enable"
 msgstr "Abilita"
 
-#: wp-show-site-by-ip.php:91
+#: ../wp-show-site-by-ip.php:91
 msgid "Enable or disable the IP filter"
 msgstr "Abilita o disabilita il filtro IP"
 
-#: wp-show-site-by-ip.php:96
+#: ../wp-show-site-by-ip.php:96
 msgid "HTTP Status"
 msgstr "Codice stato HTTP"
 
-#: wp-show-site-by-ip.php:100
+#: ../wp-show-site-by-ip.php:100
 msgid ""
 "Choose the <a href=\"https://en.wikipedia.org/wiki/List_of_HTTP_status_codes\" "
 "target=\"_blank\">HTTP Status code</a> for the temporary page. Default is "
@@ -102,14 +114,10 @@ msgstr ""
 "Scegli il codice stato HTTP per la pagina temporanea. Il valore predefinito "
 "è 503."
 
-#: wp-show-site-by-ip.php:105
-msgid "HTML"
-msgstr ""
-
-#: wp-show-site-by-ip.php:108
+#: ../wp-show-site-by-ip.php:108
 msgid "Full HTML content of the temporary page"
 msgstr "Contenuto HTML completo della pagina temporanea"
 
-#: wp-show-site-by-ip.php:170
+#: ../wp-show-site-by-ip.php:169
 msgid "Settings"
 msgstr "Impostazioni"

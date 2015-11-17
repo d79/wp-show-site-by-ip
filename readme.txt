@@ -3,8 +3,8 @@ Contributors: d79
 Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
 Requires at least: 3.0.1
-Tested up to: 4.2.4
-Stable tag: 1.3
+Tested up to: 4.3.1
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,9 @@ The manual installation method involves downloading the plugin and uploading it 
 Once it's installed, you can activate the plugin clicking “Activate Now”
 
 == Changelog ==
+
+= 1.3.1 - 17.11.2015 =
+* Fixed bug on textarea field
 
 = 1.3 - 18.08.2015 =
 * Added field for HTTP status customization

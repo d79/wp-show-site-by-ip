@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Mon Oct 12 2015 18:11:52 GMT+0200 (ora solare Europa "
 "occidentale)\n"
-"POT-Revision-Date: Mon Oct 12 2015 18:12:02 GMT+0200 (ora solare Europa "
+"POT-Revision-Date: Tue Nov 17 2015 05:28:54 GMT+0100 (ora solare Europa "
 "occidentale)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -46,27 +46,27 @@ msgstr ""
 msgid "http://www.spaziosputnik.it"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:46
+#: ../wp-show-site-by-ip.php:46
 msgctxt "page title"
 msgid "Show Site by IP"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:47
+#: ../wp-show-site-by-ip.php:47
 msgctxt "menu title"
 msgid "Show Site by IP"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:73
+#: ../wp-show-site-by-ip.php:73
 msgid "Show Site by IP"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:76
+#: ../wp-show-site-by-ip.php:76
 msgid ""
 "Warning: once enabled the IP filter you could not be able to see your "
 "website!"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:77
+#: ../wp-show-site-by-ip.php:77
 #, php-format
 msgid ""
 "To allow the access to your website from your internet connection add the "
@@ -74,7 +74,7 @@ msgid ""
 "//%s?wpok</code>"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:78
+#: ../wp-show-site-by-ip.php:78
 #, php-format
 msgid ""
 "To remove your IP from the whitelist afterwards (and then go back to see the "
@@ -82,19 +82,19 @@ msgid ""
 "the website URL, like this: <br> <code>http://%s?wpko</code>"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:87
+#: ../wp-show-site-by-ip.php:87
 msgid "Enable"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:91
+#: ../wp-show-site-by-ip.php:91
 msgid "Enable or disable the IP filter"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:96
+#: ../wp-show-site-by-ip.php:96
 msgid "HTTP Status"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:100
+#: ../wp-show-site-by-ip.php:100
 msgid ""
 "Choose the <a href=\"https://en.wikipedia.org/wiki/List_of_HTTP_status_codes\" "
 "target=\"_blank\">HTTP Status code</a> for the temporary page. Default is "
@@ -102,14 +102,14 @@ msgid ""
 "or down for maintenance). Generally, this is a temporary state.\">503</abbr>."
 msgstr ""
 
-#: /wp-show-site-by-ip.php:105
+#: ../wp-show-site-by-ip.php:105
 msgid "HTML"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:108
+#: ../wp-show-site-by-ip.php:108
 msgid "Full HTML content of the temporary page"
 msgstr ""
 
-#: /wp-show-site-by-ip.php:170
+#: ../wp-show-site-by-ip.php:169
 msgid "Settings"
 msgstr ""

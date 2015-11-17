@@ -3,7 +3,7 @@
 Plugin Name: WP Show Site by IP
 Plugin URI: https://wordpress.org/plugins/wp-show-site-by-ip/
 Description: Hide the website to unknown IPs and show a temporary page instead
-Version: 1.3
+Version: 1.3.1
 Author: Dario Candelù
 Author URI: http://www.spaziosputnik.it
 License: GPL2
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 						<tr valign="top">
 							<th scope="row"><?php _e('HTML', 'wssbi'); ?></th>
 							<td>
-								<textarea cols="50" rows="20" id="wssbi_html" name="wssbi_settings[html]" class="large-text code"><?php echo $options['html']; ?></textarea>
+								<textarea cols="50" rows="20" id="wssbi_html" name="wssbi_settings[html]" class="large-text code"><?php echo esc_html($options['html']); ?></textarea>
 								<p class="description"><?php _e('Full HTML content of the temporary page', 'wssbi'); ?></p>
 							</td>
 						</tr>
@@ -140,7 +140,6 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function save ( $input ) {
 			$options = $this->defaults();
 			$input['ips'] = $options['ips'];
-			$input['html'] = esc_html($input['html']);
 			$input['http'] = (int) $input['http'];
 			if( ! ($input['http']>100 && $input['http']<600) )
 				$input['http'] = 503;
