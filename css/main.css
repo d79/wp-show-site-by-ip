@@ -1,0 +1,300 @@
+#main-col {
+	margin-right: 300px;
+}
+
+.form-table {
+	clear: left;
+}
+.form-table h4 {
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+abbr {
+	border-bottom: 1px dotted #666;
+}
+
+#wssbi_head_wrap {
+	position: relative;
+	height: 300px;
+}
+#wssbi_head {
+	position: absolute;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+}
+
+.nav-tab-wrapper:not(.wp-clearfix):after {
+	clear: left;
+}
+
+h3 .nav-tab {
+	box-shadow: none;
+}
+
+#wssbi-old-html-notice {
+	background: #fff;
+	border-left: 4px solid #ffb900;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	padding: 5px 10px;
+}
+#wssbi-old-html-notice .button {
+	vertical-align: initial;
+}
+
+/***********/
+/* SIDEBAR */
+/***********/
+#sidebar-col {
+	float: right;
+	width: 280px;
+}
+
+.postbox h3 {
+	font-size: 14px;
+	line-height: 1.4;
+	margin: 0;
+	padding: 8px 12px;
+}
+
+.postbox .inside {
+	margin: 6px 0 0;
+}
+
+.postbox.links a {
+	display: block;
+	border: none;
+	padding: 4px;
+	text-decoration: none;
+}
+
+.postbox.links .dashicons {
+	margin-right: 5px;
+}
+
+.postbox.links .rate-text {
+	display: block;
+	text-align: center;
+}
+.postbox.links .rate-text a {
+	padding: 0;
+}
+.postbox.links .dashicons-star-filled {
+	color: #e6b800;
+}
+
+#love-from-italy {
+	text-align: center;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+	color: #f1f1f1;
+	text-shadow: #d5d5d5 1px 1px, rgba(255,255,255,.8) -1px -1px;
+	font-size: 1.5em;
+	font-weight: 100;
+}
+
+
+/*****************/
+/* TOGGLE BUTTON */
+/*****************/
+.cmn-toggle {
+	position: absolute;
+	margin-left: -9999px;
+	visibility: hidden;
+}
+.cmn-toggle + label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	-webkit-user-select: none;
+		 -moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+}
+input.cmn-toggle-round-flat + label {
+	padding: 2px;
+	width: 48px;
+	height: 24px;
+	background-color: #dddddd;
+	border-radius: 24px;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+}
+input.cmn-toggle-round-flat + label:before,
+input.cmn-toggle-round-flat + label:after {
+	display: block;
+	position: absolute;
+	content: "";
+}
+input.cmn-toggle-round-flat + label:before {
+	top: 2px;
+	left: 2px;
+	bottom: 2px;
+	right: 2px;
+	background-color: #fff;
+	border-radius: 24px;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+}
+input.cmn-toggle-round-flat + label:after {
+	top: 4px;
+	left: 4px;
+	bottom: 4px;
+	width: 20px;
+	background-color: #dddddd;
+	border-radius: 16px;
+	-webkit-transition: margin .4s, background .4s;
+	transition: margin .4s, background .4s;
+}
+input.cmn-toggle-round-flat:checked + label {
+	background-color: #8ce196;
+}
+input.cmn-toggle-round-flat:checked + label:after {
+	margin-left: 24px;
+	background-color: #8ce196;
+}
+
+.cmn-switch {
+	display: inline-block;
+	vertical-align: middle;
+}
+.cmn-switch + p {
+	display: inline-block;
+	margin-left: 3px;
+}
+
+/************/
+/* THICKBOX */
+/************/
+#TB_window {
+	max-height: 80% !important;
+}
+#TB_ajaxContent {
+	width: 100% !important;
+	height: 100% !important;
+	padding: 0 !important;
+	background: #F5F2F0;
+}
+#TB_ajaxContent pre {
+	overflow: initial !important;
+}
+
+/******************/
+/* TLITE TOOLTIPS */
+/******************/
+.tlite {
+	background: #555;
+	color: white;
+	font-family: sans-serif;
+	font-size: 0.8rem;
+	font-weight: normal;
+	text-decoration: none;
+	text-align: left;
+	padding: 0.6em 0.75rem;
+	border-radius: 4px;
+	position: absolute;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.4s;
+	white-space: nowrap;
+	box-shadow: 0 0.5rem 1rem -0.5rem black;
+	z-index: 1000;
+}
+
+.tlite-table td,
+.tlite-table th {
+	position: relative;
+}
+
+.tlite-visible {
+	visibility: visible;
+	opacity: 0.9;
+}
+
+.tlite::before {
+	content: ' ';
+	display: block;
+	background: inherit;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	transform: rotate(45deg);
+}
+
+.tlite-n::before {
+	top: -3px;
+	left: 50%;
+	margin-left: -5px;
+}
+
+.tlite-nw::before {
+	top: -3px;
+	left: 10px;
+}
+
+.tlite-ne::before {
+	top: -3px;
+	right: 10px;
+}
+
+.tlite-s::before {
+	bottom: -3px;
+	left: 50%;
+	margin-left: -5px;
+}
+
+.tlite-se::before {
+	bottom: -3px;
+	right: 10px;
+}
+
+.tlite-sw::before {
+	bottom: -3px;
+	left: 10px;
+}
+
+.tlite-w::before {
+	left: -3px;
+	top: 50%;
+	margin-top: -5px;
+}
+
+.tlite-e::before {
+	right: -3px;
+	top: 50%;
+	margin-top: -5px;
+}
+
+/************/
+/* HELP-TIP */
+/************/
+.wssbi-help-tip {
+	color: #666;
+	display: inline-block;
+	font-size: 1.1em;
+	font-style: normal;
+	height: 16px;
+	line-height: 16px;
+	position: relative;
+	vertical-align: middle;
+	width: 16px;
+}
+
+.wssbi-help-tip:after {
+	font-family: Dashicons;
+	font-weight: 400;
+	font-variant: normal;
+	line-height: 1;
+	margin: 0;
+	text-indent: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	content: "\f223";
+	cursor: help;
+}

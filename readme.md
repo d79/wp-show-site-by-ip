@@ -2,8 +2,6 @@
 
 Hide your Wordpress website to unknown IPs and replace it with a HTML page. Useful for developers to work online in private (e.g. maintenance).
 
-If you are not a developer, please use the [WooCommerce plugin page](https://wordpress.org/plugins/wp-show-site-by-ip/) on WordPress.org.
-
 ### Why it's useful
 Sometimes you need to work directly on your online Wordpress installation, like when you are developing or refining a theme for your site, and you don't want others to see your work in progress, but at the same time you need to be able to see it from whatever place you find yourself!!!
 
@@ -16,11 +14,11 @@ That makes it easier to work on your website from many different places (e.g. if
 
 ### How it works
 After installed this plugin, you'll find the submenu *Show Site by IP* on your website Dashboard, under the *Tools* menu.
-That link open the plugin configuration page, where you can upload the full HTML of your temporary page and, when you are good to go, enable the IP filter.
+That link open the plugin configuration page, where you can insert the full HTML of your temporary page and, when you are good to go, enable the IP filter.
 
-**Once enabled the IP filter you won't be able to see your website!**
+**Your IP will be automatically added to the whitelist in order for you to continue to use your website.**
 
-To allow the access to your website from your internet connection add the string `?wpok` to the website URL, like this:
+To allow the access to your website from an internet connection add the string `?wpok` to the website URL, like this:
 
 * `http://www.your-site.com?wpok`
 

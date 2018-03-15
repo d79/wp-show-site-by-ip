@@ -3,8 +3,8 @@ Contributors: d79
 Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
 Requires at least: 3.0.1
-Tested up to: 4.3.1
-Stable tag: 1.3.1
+Tested up to: 4.7.2
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,7 @@ That makes it easier to work on your website from many different places (e.g. if
 After installed this plugin, you'll find the submenu *Show Site by IP* on your website Dashboard, under the *Tools* menu.
 That link open the plugin configuration page, where you can upload the full HTML of your temporary page and, when you are good to go, enable the IP filter.
 
-**Once enabled the IP filter you won't be able to see your website!**
+**Your IP will be automatically added to the whitelist in order for you to continue to use your website.**
 
 To allow the access to your website from your internet connection add the string `?wpok` to the website URL, like this:
 
@@ -56,7 +56,27 @@ The manual installation method involves downloading the plugin and uploading it 
 
 Once it's installed, you can activate the plugin clicking “Activate Now”
 
+== Screenshots ==
+
+1. General settings.
+2. Temporary page editors.
+3. Default temporary page, fully customizable.
+
 == Changelog ==
+
+= 2.1.1 - 22.02.2017 =
+* Fixed minor bugs on italian translation
+
+= 2.1 - 22.02.2017 =
+* Made the plugin translation ready
+* Added italian translation
+
+= 2.0 - 19.09.2016 =
+* Improved editor for the temporary page
+* Customizable strings to gain and lose access
+* Added warning to notice when the filter is enabled
+* Added help screens
+* Some design changes
 
 = 1.3.1 - 17.11.2015 =
 * Fixed bug on textarea field
