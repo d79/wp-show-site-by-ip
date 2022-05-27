@@ -1,28 +1,26 @@
 <?php
-/*
-Plugin Name: WP Show Site by IP
-Plugin URI: https://wordpress.org/plugins/wp-show-site-by-ip/
-Description: Hide the website to unknown IPs and show a temporary page instead
-Version: 2.1.1
-Author: Dario Candelù
-Author URI: http://www.spaziosputnik.it
-License: GPL2
-Text Domain: wp-show-site-by-ip
-Domain Path: /languages
-*/
-/*
-Copyright 2013 Dario Candelù
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as
-published by the Free Software Foundation.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-*/
+/**
+ * Plugin Name: WP Show Site by IP
+ * Plugin URI : https://wordpress.org/plugins/wp-show-site-by-ip/
+ * Description: Hide the website to unknown IPs and show a temporary and fully customizable page instead.
+ * Version    : 2.2
+ * Author     : Dario Candelù
+ * Author URI : https://www.spaziosputnik.it
+ * License    : GPLv2 or later
+ * Text Domain: wp-show-site-by-ip
+ * Domain Path: /languages
+ * Requires at least: 3.0.1
+ * Tested up to: 6.0
+ * Requires PHP: 5.3
+ *
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License version 2, as published by the Free Software Foundation. You may NOT assume
+ * that you can use any other version of the GPL.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
 if ( ! defined( 'ABSPATH' ) ) { exit; /* Exit if accessed directly */ }
 
 
@@ -30,7 +28,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 {
 	class WP_Show_Site_by_IP
 	{
-		const VERSION = '2.1.1';
+		const VERSION = '2.2';
 
 		private $hook;
 		private $options;
@@ -83,7 +81,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				'wordOk'  => 'wpok',
 				'wordKo'  => 'wpko',
 				'title'   => 'Website temporarily offline',
-				'head'    => file_get_contents( plugin_dir_path( __FILE__ ) . '/parts/temp-page-head.html' ) 
+				'head'    => file_get_contents( plugin_dir_path( __FILE__ ) . '/parts/temp-page-head.html' )
 			));
 		}
 

@@ -3,10 +3,10 @@ Contributors: d79
 Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
 Requires at least: 3.0.1
-Tested up to: 4.7.2
-Stable tag: 2.1.1
+Tested up to: 6.0
+Stable tag: 2.2
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Hide your Wordpress website to unknown IPs and replace it with a HTML page. Useful for developers to work online in private (e.g. maintenance).
 
@@ -63,6 +63,9 @@ Once it's installed, you can activate the plugin clicking “Activate Now”
 3. Default temporary page, fully customizable.
 
 == Changelog ==
+
+= 2.2 - 27.05.2022 =
+* Tested on WordPress 6.0
 
 = 2.1.1 - 22.02.2017 =
 * Fixed minor bugs on italian translation
