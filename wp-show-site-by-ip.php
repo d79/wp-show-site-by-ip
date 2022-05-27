@@ -1,17 +1,18 @@
 <?php
 /**
- * Plugin Name: WP Show Site by IP
- * Plugin URI : https://wordpress.org/plugins/wp-show-site-by-ip/
- * Description: Hide the website to unknown IPs and show a temporary and fully customizable page instead.
- * Version    : 2.2
- * Author     : Dario Candelù
- * Author URI : https://www.spaziosputnik.it
- * License    : GPLv2 or later
- * Text Domain: wp-show-site-by-ip
- * Domain Path: /languages
+ * Plugin Name:       WP Show Site by IP
+ * Plugin URI:        https://wordpress.org/plugins/wp-show-site-by-ip/
+ * Description:       Hide the website to unknown IPs and show a temporary and fully customizable page instead.
+ * Version:           2.2.1
+ * Author:            Dario Candelù
+ * Author URI:        https://www.spaziosputnik.it
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       wp-show-site-by-ip
+ * Domain Path:       /languages
  * Requires at least: 3.0.1
- * Tested up to: 6.0
- * Requires PHP: 5.3
+ * Tested up to:      6.0
+ * Requires PHP:      5.3
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
  * General Public License version 2, as published by the Free Software Foundation. You may NOT assume
@@ -28,7 +29,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 {
 	class WP_Show_Site_by_IP
 	{
-		const VERSION = '2.2';
+		const VERSION = '2.2.1';
 
 		private $hook;
 		private $options;
