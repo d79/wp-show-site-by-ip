@@ -1,13 +1,13 @@
 'use strict';
 
-var wssbi_form_changed = false;
+let wssbi_form_changed = false;
 
 jQuery(document).ready(function($){
 
 	/* TABS */
-	var anchor = window.location.hash;
-	var active = 0;
-	var $tabs = $('.nav-tab-wrapper');
+	const anchor = window.location.hash;
+	let active = 0;
+	const $tabs = $('.nav-tab-wrapper');
 	$('form .form-table').removeClass('hidden');
 	if(anchor)
 		$('a', $tabs).each(function(i){
@@ -16,9 +16,9 @@ jQuery(document).ready(function($){
 	$('a', $tabs).eq(active).addClass('nav-tab-active');
 	$('form > .form-table').not(':eq('+active+')').hide();
 	// trick for correct referer
-	var $referer = $('input[name=_wp_http_referer]');
+	const $referer = $('input[name=_wp_http_referer]');
 	$('form').after('<input id="orig_referer" type="hidden" value="">');
-	var $orig = $('#orig_referer');
+	const $orig = $('#orig_referer');
 	$orig.val($referer.val());
 	$referer.val($orig.val() + anchor);
 	// click function
@@ -52,19 +52,35 @@ jQuery(document).ready(function($){
 	});
 
 	/* INIT ACE EDITOR */
-	var editor = ace.edit("wssbi_head");
+	const editor = ace.edit("wssbi_head");
 	editor.setTheme("ace/theme/tomorrow");
 	editor.getSession().setMode("ace/mode/html");
 	editor.getSession().setUseWorker(false);
 	editor.setHighlightActiveLine(false);
 	editor.getSession().setUseWrapMode(true);
 	editor.setShowPrintMargin(false);
-	var textarea = $('#wssbi_head_textarea');
+	const textarea = $('#wssbi_head_textarea');
 	editor.getSession().setValue(textarea.val());
 	editor.getSession().on('change', function(){
 		textarea.val(editor.getSession().getValue());
 	});
 	editor.on("change", function() {
+		window.wssbi_form_changed = true;
+	});
+
+	const editor2 = ace.edit("wssbi_iplist");
+	editor2.setTheme("ace/theme/tomorrow");
+	editor2.getSession().setMode("ace/mode/html");
+	editor2.getSession().setUseWorker(false);
+	editor2.setHighlightActiveLine(false);
+	editor2.getSession().setUseWrapMode(true);
+	editor2.setShowPrintMargin(false);
+	const textarea2 = $('#wssbi_iplist_textarea');
+	editor2.getSession().setValue(textarea2.val());
+	editor2.getSession().on('change', function(){
+		textarea2.val(editor2.getSession().getValue());
+	});
+	editor2.on("change", function() {
 		window.wssbi_form_changed = true;
 	});
 

@@ -3,8 +3,8 @@ Contributors: d79
 Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
 Requires at least: 3.0.1
-Tested up to: 6.0
-Stable tag: 2.2.1
+Tested up to: 6.1.1
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,10 @@ Once it's installed, you can activate the plugin clicking “Activate Now”
 3. Default temporary page, fully customizable.
 
 == Changelog ==
+
+= 2.3 - 13.03.2023 =
+* Added possibility to manually edit the IPs list
+* Tested on WordPress 6.1.1
 
 = 2.2.1 - 27.05.2022 =
 * Fixed plugin header

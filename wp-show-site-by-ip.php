@@ -3,7 +3,7 @@
  * Plugin Name:       WP Show Site by IP
  * Plugin URI:        https://wordpress.org/plugins/wp-show-site-by-ip/
  * Description:       Hide the website to unknown IPs and show a temporary and fully customizable page instead.
- * Version:           2.2.1
+ * Version:           2.3
  * Author:            Dario Candelù
  * Author URI:        https://www.spaziosputnik.it
  * License:           GPLv2 or later
@@ -11,7 +11,7 @@
  * Text Domain:       wp-show-site-by-ip
  * Domain Path:       /languages
  * Requires at least: 3.0.1
- * Tested up to:      6.0
+ * Tested up to:      6.1.1
  * Requires PHP:      5.3
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
@@ -29,7 +29,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 {
 	class WP_Show_Site_by_IP
 	{
-		const VERSION = '2.2.1';
+		const VERSION = '2.3';
 
 		private $hook;
 		private $options;
@@ -118,8 +118,8 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function save ( $input ) {
 			check_admin_referer( 'wssbi', 'wssbi_field' );
-			$input['enabled'] = isset($_POST['wssbi_settings']['enabled']) && $_POST['wssbi_settings']['enabled']==1 ? 1 : 0;
-			$input['ips']     = $this->options['ips'];
+			$input['enabled'] = (isset($_POST['wssbi_settings']['enabled']) && $_POST['wssbi_settings']['enabled']==1) ? 1 : 0;
+			$input['ips']     = isset($_POST['wssbi_iplist']) ? $this->_sanitize_ips($_POST['wssbi_iplist']) : $this->options['ips'];
 			$input['wordOk']  = urlencode(sanitize_title($input['wordOk']));
 			$input['wordOk']  = empty($input['wordOk']) ? 'wpok' : $input['wordOk'];
 			$input['wordKo']  = urlencode(sanitize_title($input['wordKo']));
@@ -232,6 +232,15 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function forget() {
 			delete_option( 'wssbi_html_old' );
+		}
+
+		function _sanitize_ips( $list ) {
+			$lines = explode( "\n", $list );
+			$lines = array_filter( $lines, 'trim' );
+			$lines = array_map( 'trim', $lines );
+			return array_filter( $lines, function( $line ) {
+				return filter_var( $line, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
+			} );
 		}
 
 	} // class end

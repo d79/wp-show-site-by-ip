@@ -1,7 +1,7 @@
 <form action="options.php" method="post" id="wssbi-form">
 
 	<?php wp_nonce_field( 'wssbi', 'wssbi_field' ); ?>
-	
+
 	<?php settings_fields( 'wssbiPage' ); ?>
 
 	<table class="form-table">
@@ -91,6 +91,20 @@
 		</tr>
 	</table>
 
+	<table class="form-table hidden">
+		<tr valign="top">
+			<td>
+				<h4><?php _e('IPs list', 'wp-show-site-by-ip'); ?></h4>
+				<p style="margin: -0.5em 0 1.5em"><?php _e('Here you can manually edit the list of authorized IPs', 'wp-show-site-by-ip'); ?> <span class="wssbi-help-tip" title="<?php _e('Your curent IP will not be removed', 'wp-show-site-by-ip'); ?>"></span></p>
+				<textarea id="wssbi_iplist_textarea" name="wssbi_iplist" style="display:none"><?php echo join("\n", $ips); ?></textarea>
+				<div id="wssbi_iplist_wrap">
+					<div id="wssbi_iplist"><?php echo join("\n", $ips); ?></div>
+				</div>
+				<p class="description"><?php _e('Insert one IP address for line', 'wp-show-site-by-ip'); ?></p>
+			</td>
+		</tr>
+	</table>
+
 	<?php submit_button(); ?>
 
 </form>
@@ -98,7 +112,7 @@
 <script>
 	jQuery(document).ready(function($) {
 
-		$('#wssbieditor, #wssbi_head_textarea').on('keyup', function(e) {
+		$('#wssbieditor, #wssbi_head_textarea, #wssbi_iplist_textarea').on('keyup', function(e) {
 			window.wssbi_form_changed = true;
 		});
 

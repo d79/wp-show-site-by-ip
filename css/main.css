@@ -298,3 +298,12 @@ input.cmn-toggle-round-flat:checked + label:after {
 	content: "\f223";
 	cursor: help;
 }
+
+/************/
+/* IPs LIST */
+/************/
+#wssbi_iplist {
+	min-height: 12em;
+	max-width: 20em;
+	font-size: 1em;
+}

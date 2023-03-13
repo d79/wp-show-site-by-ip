@@ -75,6 +75,10 @@ $screen->add_help_tab( array(
 			<strong>'.__('Styles & scripts', 'wp-show-site-by-ip').'</strong><br>
 			'.__("This code will be loaded inside the head tag of the temporary page, and it allows to add some styles (CSS) and scripts (Javascript) to the page, even from external resources.", 'wp-show-site-by-ip').'
 		</p>
+		<p>
+			<strong>'.__('IPs list', 'wp-show-site-by-ip').'</strong><br>
+			'.__("It's the list of authorized IPs and can be manually edited.", 'wp-show-site-by-ip').'
+		</p>
 	'
 ));
 
