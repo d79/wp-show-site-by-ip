@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function __construct () {
 			$this->set_options();
-			add_action( 'plugins_loaded', array($this, 'textdomain') );
+			add_action( 'init', array($this, 'textdomain') );
 			add_action( 'admin_menu', array($this, 'menu') );
 			add_action( 'admin_init', array($this, 'init') );
 			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
