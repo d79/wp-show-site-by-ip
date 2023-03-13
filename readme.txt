@@ -65,7 +65,7 @@ Once it's installed, you can activate the plugin clicking “Activate Now”
 == Changelog ==
 
 = 2.3 - 13.03.2023 =
-* Added possibility to manually edit the IPs list
+* Added possibility to manually edit the list of authorized IPs
 * Tested on WordPress 6.1.1
 
 = 2.2.1 - 27.05.2022 =
