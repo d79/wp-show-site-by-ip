@@ -4,7 +4,7 @@ Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
 Requires at least: 3.0.1
 Tested up to: 6.2.2
-Stable tag: 2.3.2
+Stable tag: 2.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ Once it's installed, you can activate the plugin clicking “Activate Now”
 3. Default temporary page, fully customizable.
 
 == Changelog ==
+
+= 2.3.3 - 22.07.2023 =
+* Minor fix
 
 = 2.3.2 - 22.07.2023 =
 * Bug fix: allow WP Cron to work even with the filter enabled
