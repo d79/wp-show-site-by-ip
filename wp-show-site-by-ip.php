@@ -143,7 +143,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			if(isset($_GET[$options['wordKo']]) && in_array($ip, $options['ips']))
 				$options['ips'] = array_diff($options['ips'], array($ip));
 			update_option( 'wssbi_settings', $options );
-			if($options['enabled'] && !in_array($ip, $options['ips'])) {
+			if(!wp_doing_cron() && ($options['enabled'] && !in_array($ip, $options['ips']))) {
 				header('HTTP/1.1 '.$options['http']);
 				header('Retry-After: 3600');
 				extract($options);
