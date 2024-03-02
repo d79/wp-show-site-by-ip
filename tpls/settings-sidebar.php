@@ -33,6 +33,6 @@
 	</div>
 </div>
 
-<div id="love-from-italy">
-	<span> MADE WITH <span class="dashicons dashicons-heart"></span> IN ITALY</span>
+<div id="made-in-italy">
+	<span>MADE IN ITALY</span>
 </div>
