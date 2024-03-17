@@ -95,12 +95,12 @@
 		<tr valign="top">
 			<td>
 				<h4><?php _e('IPs list', 'wp-show-site-by-ip'); ?></h4>
-				<p style="margin: -0.5em 0 1.5em"><?php _e('Here you can manually edit the list of authorized IPs', 'wp-show-site-by-ip'); ?> <span class="wssbi-help-tip" title="<?php _e('Your curent IP will not be removed', 'wp-show-site-by-ip'); ?>"></span></p>
+				<p style="margin: -0.5em 0 1.5em"><?php _e('Here you can manually edit the list of authorized IPs', 'wp-show-site-by-ip'); ?> <span class="wssbi-help-tip" title="<?php _e('Your current IP will not be removed', 'wp-show-site-by-ip'); ?>"></span></p>
 				<textarea id="wssbi_iplist_textarea" name="wssbi_iplist" style="display:none"><?php echo join("\n", $ips); ?></textarea>
 				<div id="wssbi_iplist_wrap">
 					<div id="wssbi_iplist"><?php echo join("\n", $ips); ?></div>
 				</div>
-				<p class="description"><?php _e('Insert one IP address for line', 'wp-show-site-by-ip'); ?></p>
+				<p class="description"><?php _e('Insert one IP address for line', 'wp-show-site-by-ip'); ?><br><?php _e('Wildcards allowed (e.g. <code>123.123.123.*</code>)', 'wp-show-site-by-ip'); ?></p>
 			</td>
 		</tr>
 	</table>

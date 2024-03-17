@@ -381,7 +381,7 @@ msgid "WP Show Site by IP"
 msgstr ""
 
 #: inc/settings-form.php:98
-msgid "Your curent IP will not be removed"
+msgid "Your current IP will not be removed"
 msgstr ""
 
 #: inc/help-screens.php:38

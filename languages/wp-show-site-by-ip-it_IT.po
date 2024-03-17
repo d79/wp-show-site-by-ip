@@ -435,7 +435,7 @@ msgid "WP Show Site by IP"
 msgstr "WP Mostra Sito per IP"
 
 #: inc/settings-form.php:98
-msgid "Your curent IP will not be removed"
+msgid "Your current IP will not be removed"
 msgstr "Il tuo IP attuale non verrà rimosso"
 
 #: inc/help-screens.php:38

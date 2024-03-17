@@ -14,7 +14,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			add_action( 'admin_menu', array($this, 'menu') );
 			add_action( 'admin_init', array($this, 'init') );
 			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
-			add_action( 'plugins_loaded', array($this, 'check') );
+			add_action( 'plugins_loaded', array($this, 'check'), 15 );
 			add_action( 'plugin_action_links_' . FILE, array($this, 'link2settings') );
 			add_action( 'admin_notices', array($this, 'notice') );
 			register_activation_hook( FILE, array($this, 'activate') );
@@ -110,15 +110,15 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function check () {
 			$ip = $this->ip();
-			$options = $this->options;
-			if(isset($_GET[$options['wordOk']]) && !in_array($ip, $options['ips'])) {
+			$options =& $this->options;
+			if(isset($_GET[$options['wordOk']]) && !$this->_ip_in_ips($ip)) {
 				$options['ips'] []= $ip;
 			}
-			if(isset($_GET[$options['wordKo']]) && in_array($ip, $options['ips'])) {
+			if(isset($_GET[$options['wordKo']]) && $this->_ip_in_ips($ip)) {
 				$options['ips'] = array_diff($options['ips'], array($ip));
 			}
 			update_option( 'wssbi_settings', $options );
-			if(!wp_doing_cron() && ($options['enabled'] && !in_array($ip, $options['ips']))) {
+			if(!wp_doing_cron() && ($options['enabled'] && !$this->_ip_in_ips($ip))) {
 				header('HTTP/1.1 '.$options['http']);
 				header('Retry-After: 3600');
 				extract($options);
@@ -214,8 +214,26 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			$lines = array_filter( $lines, 'trim' );
 			$lines = array_map( 'trim', $lines );
 			return array_filter( $lines, function( $line ) {
+				$line = str_replace( '.*', '.1', $line );
 				return filter_var( $line, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
 			} );
+		}
+
+		function _ip_in_ips( $ip ) {
+			$arr1 = explode('.', $ip);
+			foreach ($this->options['ips'] as $addr) {
+				$arr2 = explode('.', $addr);
+				foreach ($arr2 as $key => $val) {
+					if( $val !== '*' && $val !== $arr1[$key] ) {
+						break;
+					}
+					if( $key === 3 ) { // evey single digit matched
+						return true;
+					}
+				}
+			}
+			return false;
+			// return in_array( $ip, $this->options['ips'] );
 		}
 
 	} // class end
