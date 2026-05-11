@@ -32,7 +32,11 @@ That link open the plugin configuration page, where you can upload the full HTML
 
 The whitelist accepts one rule per line and supports IPv4, IPv6 and full-segment wildcards such as `123.123.123.*` or `2001:db8:*:*:*:*:*:*`.
 
+Comment lines are supported only when they start with `#`, for example `# office`.
+
 For security, the plugin currently checks only `REMOTE_ADDR` and does not automatically trust proxy or CDN headers such as `X-Forwarded-For`.
+
+You can also configure a URL whitelist made of one string per line: when the current request URL contains one of those strings, the website is shown for that request only, without saving the visitor IP.
 
 To allow the access to your website from your internet connection add the string `?wpok` to the website URL, like this:
 

@@ -48,14 +48,15 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function set_options () {
 			$this->options = wp_parse_args(get_option('wssbi_settings'), array(
-				'ips'     => array(),
-				'body'    => file_get_contents( DIR . 'parts/temp-page-body.html' ),
-				'enabled' => 0,
-				'http'    => 503,
-				'wordOk'  => 'wpok',
-				'wordKo'  => 'wpko',
-				'title'   => 'Website temporarily offline',
-				'head'    => file_get_contents( DIR . 'parts/temp-page-head.html' )
+				'ips'                   => array(),
+				'url_whitelist_strings' => array(),
+				'body'                  => file_get_contents( DIR . 'parts/temp-page-body.html' ),
+				'enabled'               => 0,
+				'http'                  => 503,
+				'wordOk'                => 'wpok',
+				'wordKo'                => 'wpko',
+				'title'                 => 'Website temporarily offline',
+				'head'                  => file_get_contents( DIR . 'parts/temp-page-head.html' )
 			));
 		}
 
@@ -93,6 +94,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			check_admin_referer( 'wssbi', 'wssbi_field' );
 			$input['enabled'] = (isset($_POST['wssbi_settings']['enabled']) && $_POST['wssbi_settings']['enabled']==1) ? 1 : 0;
 			$input['ips']     = isset($_POST['wssbi_iplist']) ? $this->sanitize_ip_rules($_POST['wssbi_iplist']) : $this->options['ips'];
+			$input['url_whitelist_strings'] = isset($_POST['wssbi_url_whitelist_strings']) ? $this->sanitize_url_whitelist_strings($_POST['wssbi_url_whitelist_strings']) : $this->options['url_whitelist_strings'];
 			$input['wordOk']  = urlencode(sanitize_title($input['wordOk']));
 			$input['wordOk']  = empty($input['wordOk']) ? 'wpok' : $input['wordOk'];
 			$input['wordKo']  = urlencode(sanitize_title($input['wordKo']));
@@ -112,6 +114,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function check () {
 			$ip = $this->get_client_ip();
+			$request_uri = $this->get_request_uri();
 			$options =& $this->options;
 			$options_modified = false;
 			if( isset($_GET[$options['wordOk']]) && $ip && !$this->has_ip_access($ip, $options['ips']) ) {
@@ -127,7 +130,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			if( $options_modified ) {
 				update_option( 'wssbi_settings', $options );
 			}
-			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->has_ip_access($ip, $options['ips']);
+			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->request_matches_url_whitelist($request_uri, $options['url_whitelist_strings']) && !$this->has_ip_access($ip, $options['ips']);
 			$show_temp_page = apply_filters( 'wssbi_show_temp_page', $show_temp_page, $ip, $options );
 			if( $show_temp_page ) {
 				header('HTTP/1.1 '.$options['http']);
@@ -150,6 +153,15 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				return null;
 			}
 			return $this->normalize_ip( trim( $ip ) );
+		}
+
+		function get_request_uri() {
+			$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : null;
+			if( ! is_string( $request_uri ) ) {
+				return null;
+			}
+			$request_uri = trim( $request_uri );
+			return '' === $request_uri ? null : $request_uri;
 		}
 
 		function link2settings( $links ) {
@@ -231,22 +243,24 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		}
 
 		function sanitize_ip_rules( $list ) {
-			$lines = explode( "\n", $list );
-			$lines = array_filter( $lines, 'trim' );
-			$lines = array_map( 'trim', $lines );
 			$rules = array();
-			foreach ( $lines as $line ) {
+			foreach ( $this->get_config_lines( $list ) as $line ) {
 				$rule = $this->sanitize_ip_rule( $line );
 				if( null !== $rule ) {
 					$rules []= $rule;
 				}
 			}
-			$rules = $this->deduplicate_ip_rules( $rules );
+			$rules = $this->deduplicate_entries( $rules );
 			return apply_filters( 'wssbi_ip_rules', $rules );
 		}
 
 		function _sanitize_ips( $list ) {
 			return $this->sanitize_ip_rules( $list );
+		}
+
+		function sanitize_url_whitelist_strings( $list ) {
+			$strings = $this->deduplicate_entries( $this->get_config_lines( $list ) );
+			return $strings;
 		}
 
 		function has_ip_access( $ip, $rules = null ) {
@@ -270,6 +284,21 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function _ip_in_ips( $ip ) {
 			return $this->has_ip_access( $ip );
+		}
+
+		function request_matches_url_whitelist( $request_uri, $rules = null ) {
+			if( ! is_string( $request_uri ) || '' === $request_uri ) {
+				return false;
+			}
+			if( null === $rules ) {
+				$rules = $this->options['url_whitelist_strings'];
+			}
+			foreach ( $rules as $rule ) {
+				if( '' !== $rule && false !== strpos( $request_uri, $rule ) ) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		function ip_matches_rule( $ip, $rule ) {
@@ -464,7 +493,24 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			return '' === $group ? '0' : $group;
 		}
 
-		function deduplicate_ip_rules( $rules ) {
+		function get_config_lines( $list ) {
+			$lines = explode( "\n", (string) $list );
+			$normalized = array();
+			foreach ( $lines as $line ) {
+				$line = trim( $line );
+				if( '' === $line || $this->is_comment_line( $line ) ) {
+					continue;
+				}
+				$normalized []= $line;
+			}
+			return $normalized;
+		}
+
+		function is_comment_line( $line ) {
+			return 0 === strpos( $line, '#' );
+		}
+
+		function deduplicate_entries( $rules ) {
 			$deduplicated = array();
 			foreach ( $rules as $rule ) {
 				if( ! in_array( $rule, $deduplicated, true ) ) {
@@ -472,6 +518,10 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				}
 			}
 			return array_values( $deduplicated );
+		}
+
+		function deduplicate_ip_rules( $rules ) {
+			return $this->deduplicate_entries( $rules );
 		}
 
 	} // class end

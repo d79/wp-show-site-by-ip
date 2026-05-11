@@ -100,7 +100,18 @@
 				<div id="wssbi_iplist_wrap">
 					<div id="wssbi_iplist"><?php echo join("\n", $ips); ?></div>
 				</div>
-				<p class="description"><?php _e('Insert one IP rule per line', 'wp-show-site-by-ip'); ?><br><?php _e('Supported: IPv4, IPv6 and full-segment wildcards (e.g. <code>123.123.123.*</code> or <code>2001:db8:*:*:*:*:*:*</code>)', 'wp-show-site-by-ip'); ?><br><?php _e('The plugin currently checks only <code>REMOTE_ADDR</code> and does not automatically trust proxy/CDN headers.', 'wp-show-site-by-ip'); ?></p>
+				<p class="description"><?php _e('Insert one IP rule per line', 'wp-show-site-by-ip'); ?><br><?php _e('Supported: IPv4, IPv6 and full-segment wildcards (e.g. <code>123.123.123.*</code> or <code>2001:db8:*:*:*:*:*:*</code>)', 'wp-show-site-by-ip'); ?><br><?php _e('Comments are supported only when the line starts with <code>#</code> (e.g. <code># ufficio</code>).', 'wp-show-site-by-ip'); ?><br><?php _e('The plugin currently checks only <code>REMOTE_ADDR</code> and does not automatically trust proxy/CDN headers.', 'wp-show-site-by-ip'); ?></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td>
+				<h4><?php _e('URL whitelist', 'wp-show-site-by-ip'); ?></h4>
+				<p style="margin: -0.5em 0 1.5em"><?php _e('Here you can allow requests whose URL contains one of the following strings.', 'wp-show-site-by-ip'); ?></p>
+				<textarea id="wssbi_url_whitelist_textarea" name="wssbi_url_whitelist_strings" style="display:none"><?php echo join("\n", $url_whitelist_strings); ?></textarea>
+				<div id="wssbi_url_whitelist_wrap">
+					<div id="wssbi_url_whitelist"><?php echo join("\n", $url_whitelist_strings); ?></div>
+				</div>
+				<p class="description"><?php _e('Insert one string per line. Each string is searched literally inside path and query of the current URL.', 'wp-show-site-by-ip'); ?><br><?php _e('Comments are supported only when the line starts with <code>#</code>.', 'wp-show-site-by-ip'); ?><br><?php _e('Matching a string bypasses the temporary page only for the current request and does not save the visitor IP.', 'wp-show-site-by-ip'); ?></p>
 			</td>
 		</tr>
 	</table>
@@ -112,7 +123,7 @@
 <script>
 	jQuery(document).ready(function($) {
 
-		$('#wssbieditor, #wssbi_head_textarea, #wssbi_iplist_textarea').on('keyup', function(e) {
+		$('#wssbieditor, #wssbi_head_textarea, #wssbi_iplist_textarea, #wssbi_url_whitelist_textarea').on('keyup', function(e) {
 			window.wssbi_form_changed = true;
 		});
 

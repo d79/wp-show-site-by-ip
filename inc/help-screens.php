@@ -19,6 +19,8 @@ $screen->add_help_tab( array(
 		<p> %s <br> %s </p>
 		<p><strong> %s </strong></p>
 		<p> %s </p>
+		<p> %s </p>
+		<p> %s </p>
 		<p><code>http://www.your-site.com?wpok</code></p>
 		<p> %s </p>
 		<p><code>http://www.your-site.com?wpko</code></p>
@@ -36,6 +38,8 @@ $screen->add_help_tab( array(
 		__( "After installed this plugin, you'll find the submenu <b>Show Site by IP</b> on your website Dashboard, under the <b>Tools</b> menu.", 'wp-show-site-by-ip' ),
 		__( "That link open the plugin configuration page, where you can insert the full HTML of your temporary page and, when you are good to go, enable the IP filter.", 'wp-show-site-by-ip' ),
 		__( "Your IP will be automatically added to the whitelist in order for you to continue to use your website.", 'wp-show-site-by-ip' ),
+		__( "The IP whitelist accepts one rule per line and supports comment lines starting with <code>#</code>.", 'wp-show-site-by-ip' ),
+		__( "You can also add URL whitelist strings: when the current request URL contains one of them, the website is shown for that request without saving the visitor IP.", 'wp-show-site-by-ip' ),
 		__( "To allow access to your website from an internet connection add the string <code>?wpok</code> to the website URL, like this:", 'wp-show-site-by-ip' ),
 		__( "To remove your IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string <code>?wpko</code> to the website URL, like this:", 'wp-show-site-by-ip' ),
 		__( "That's it. 🙂", 'wp-show-site-by-ip' )
@@ -77,7 +81,11 @@ $screen->add_help_tab( array(
 		</p>
 		<p>
 			<strong>'.__('IPs list', 'wp-show-site-by-ip').'</strong><br>
-			'.__("It's the list of authorized IPs and can be manually edited.", 'wp-show-site-by-ip').'
+			'.__("It's the list of authorized IPs and can be manually edited. Comment lines starting with # are ignored.", 'wp-show-site-by-ip').'
+		</p>
+		<p>
+			<strong>'.__('URL whitelist', 'wp-show-site-by-ip').'</strong><br>
+			'.__("It's the list of URL strings that temporarily bypass the maintenance page for the current request only, without saving the visitor IP.", 'wp-show-site-by-ip').'
 		</p>
 	'
 ));
