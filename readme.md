@@ -18,6 +18,10 @@ That link open the plugin configuration page, where you can insert the full HTML
 
 **Your IP will be automatically added to the whitelist in order for you to continue to use your website.**
 
+The whitelist accepts one rule per line and supports IPv4, IPv6 and full-segment wildcards such as `123.123.123.*` or `2001:db8:*:*:*:*:*:*`.
+
+For security, the plugin currently checks only `REMOTE_ADDR` and does not automatically trust proxy or CDN headers such as `X-Forwarded-For`.
+
 To allow the access to your website from an internet connection add the string `?wpok` to the website URL, like this:
 
 * `http://www.your-site.com?wpok`

@@ -12,7 +12,7 @@
  * Domain Path:       /languages
  * Requires at least: 3.0.1
  * Tested up to:      6.4.3
- * Requires PHP:      5.3
+ * Requires PHP:      7.0
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
  * General Public License version 2, as published by the Free Software Foundation. You may NOT assume

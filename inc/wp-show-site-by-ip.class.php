@@ -92,7 +92,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function save ( $input ) {
 			check_admin_referer( 'wssbi', 'wssbi_field' );
 			$input['enabled'] = (isset($_POST['wssbi_settings']['enabled']) && $_POST['wssbi_settings']['enabled']==1) ? 1 : 0;
-			$input['ips']     = isset($_POST['wssbi_iplist']) ? $this->_sanitize_ips($_POST['wssbi_iplist']) : $this->options['ips'];
+			$input['ips']     = isset($_POST['wssbi_iplist']) ? $this->sanitize_ip_rules($_POST['wssbi_iplist']) : $this->options['ips'];
 			$input['wordOk']  = urlencode(sanitize_title($input['wordOk']));
 			$input['wordOk']  = empty($input['wordOk']) ? 'wpok' : $input['wordOk'];
 			$input['wordKo']  = urlencode(sanitize_title($input['wordKo']));
@@ -102,28 +102,32 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			$input['http']    = (int) $input['http'];
 			if( ! ($input['http']>100 && $input['http']<600) )
 				$input['http'] = 503;
-			$ip = $this->ip();
-			if( !in_array($ip, $input['ips']) )
+			$ip = $this->get_client_ip();
+			if( $ip && !in_array($ip, $input['ips'], true) ) {
 				$input['ips'] []= $ip;
+				$input['ips'] = $this->deduplicate_ip_rules( $input['ips'] );
+			}
 			return $input;
 		}
 
 		function check () {
-			$ip = $this->ip();
+			$ip = $this->get_client_ip();
 			$options =& $this->options;
 			$options_modified = false;
-			if(isset($_GET[$options['wordOk']]) && !$this->_ip_in_ips($ip)) {
+			if( isset($_GET[$options['wordOk']]) && $ip && !$this->has_ip_access($ip, $options['ips']) ) {
 				$options['ips'] []= $ip;
+				$options['ips'] = $this->deduplicate_ip_rules( $options['ips'] );
 				$options_modified = true;
 			}
-			if(isset($_GET[$options['wordKo']]) && $this->_ip_in_ips($ip)) {
+			if( isset($_GET[$options['wordKo']]) && $ip && in_array($ip, $options['ips'], true) ) {
 				$options['ips'] = array_diff($options['ips'], array($ip));
+				$options['ips'] = array_values( $options['ips'] );
 				$options_modified = true;
 			}
 			if( $options_modified ) {
 				update_option( 'wssbi_settings', $options );
 			}
-			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->_ip_in_ips($ip);
+			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->has_ip_access($ip, $options['ips']);
 			$show_temp_page = apply_filters( 'wssbi_show_temp_page', $show_temp_page, $ip, $options );
 			if( $show_temp_page ) {
 				header('HTTP/1.1 '.$options['http']);
@@ -135,7 +139,17 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		}
 
 		function ip() {
-			return $_SERVER['REMOTE_ADDR'];
+			return $this->get_client_ip();
+		}
+
+		function get_client_ip() {
+			$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? wp_unslash( $_SERVER['REMOTE_ADDR'] ) : null;
+			$ip = is_string( $ip ) ? trim( $ip ) : null;
+			$ip = apply_filters( 'wssbi_client_ip', $ip, $_SERVER );
+			if( ! is_string( $ip ) ) {
+				return null;
+			}
+			return $this->normalize_ip( trim( $ip ) );
 		}
 
 		function link2settings( $links ) {
@@ -216,31 +230,248 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			delete_option( 'wssbi_html_old' );
 		}
 
-		function _sanitize_ips( $list ) {
+		function sanitize_ip_rules( $list ) {
 			$lines = explode( "\n", $list );
 			$lines = array_filter( $lines, 'trim' );
 			$lines = array_map( 'trim', $lines );
-			return array_filter( $lines, function( $line ) {
-				$line = str_replace( '.*', '.1', $line );
-				return filter_var( $line, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
-			} );
+			$rules = array();
+			foreach ( $lines as $line ) {
+				$rule = $this->sanitize_ip_rule( $line );
+				if( null !== $rule ) {
+					$rules []= $rule;
+				}
+			}
+			$rules = $this->deduplicate_ip_rules( $rules );
+			return apply_filters( 'wssbi_ip_rules', $rules );
 		}
 
-		function _ip_in_ips( $ip ) {
-			$arr1 = explode('.', $ip);
-			foreach ($this->options['ips'] as $addr) {
-				$arr2 = explode('.', $addr);
-				foreach ($arr2 as $key => $val) {
-					if( $val !== '*' && $val !== $arr1[$key] ) {
-						break;
-					}
-					if( $key === 3 ) { // evey single digit matched
-						return true;
-					}
+		function _sanitize_ips( $list ) {
+			return $this->sanitize_ip_rules( $list );
+		}
+
+		function has_ip_access( $ip, $rules = null ) {
+			if( ! $ip ) {
+				return false;
+			}
+			$normalized_ip = $this->normalize_ip( $ip );
+			if( ! $normalized_ip ) {
+				return false;
+			}
+			if( null === $rules ) {
+				$rules = $this->options['ips'];
+			}
+			foreach ( $rules as $rule ) {
+				if( $this->ip_matches_rule( $normalized_ip, $rule ) ) {
+					return true;
 				}
 			}
 			return false;
-			// return in_array( $ip, $this->options['ips'] );
+		}
+
+		function _ip_in_ips( $ip ) {
+			return $this->has_ip_access( $ip );
+		}
+
+		function ip_matches_rule( $ip, $rule ) {
+			$normalized_ip = $this->normalize_ip( $ip );
+			$normalized_rule = $this->sanitize_ip_rule( $rule );
+			$matches = false;
+
+			if( $normalized_ip && $normalized_rule ) {
+				if( false === strpos( $normalized_rule, '*' ) ) {
+					$matches = ( $normalized_ip === $normalized_rule );
+				} else {
+					$ip_version = $this->get_ip_version( $normalized_ip );
+					$rule_version = $this->get_rule_version( $normalized_rule );
+					if( $ip_version && $ip_version === $rule_version ) {
+						$ip_segments = $this->get_ip_segments( $normalized_ip, $ip_version );
+						$rule_segments = $this->get_rule_segments( $normalized_rule, $rule_version );
+						$matches = ( count( $ip_segments ) === count( $rule_segments ) );
+						foreach ( $rule_segments as $index => $segment ) {
+							if( ! $matches ) {
+								break;
+							}
+							if( '*' !== $segment && $segment !== $ip_segments[ $index ] ) {
+								$matches = false;
+							}
+						}
+					}
+				}
+			}
+
+			return (bool) apply_filters( 'wssbi_ip_rule_matches', $matches, $normalized_ip, $normalized_rule );
+		}
+
+		function sanitize_ip_rule( $rule ) {
+			if( ! is_string( $rule ) ) {
+				return null;
+			}
+			$rule = strtolower( trim( $rule ) );
+			if( '' === $rule ) {
+				return null;
+			}
+			if( false === strpos( $rule, '*' ) ) {
+				return $this->normalize_ip( $rule );
+			}
+			if( false !== strpos( $rule, '.' ) && false === strpos( $rule, ':' ) ) {
+				return $this->normalize_ipv4_rule( $rule );
+			}
+			if( false !== strpos( $rule, ':' ) && false === strpos( $rule, '.' ) ) {
+				return $this->normalize_ipv6_rule( $rule );
+			}
+			return null;
+		}
+
+		function normalize_ip( $ip ) {
+			if( ! is_string( $ip ) ) {
+				return null;
+			}
+			$ip = trim( $ip );
+			if( '' === $ip || ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+				return null;
+			}
+			if( false !== strpos( $ip, ':' ) ) {
+				$binary = @inet_pton( $ip );
+				if( false === $binary ) {
+					return null;
+				}
+				return strtolower( inet_ntop( $binary ) );
+			}
+			return $ip;
+		}
+
+		function normalize_ipv4_rule( $rule ) {
+			$segments = explode( '.', $rule );
+			if( 4 !== count( $segments ) ) {
+				return null;
+			}
+			$normalized = array();
+			foreach ( $segments as $segment ) {
+				if( '*' === $segment ) {
+					$normalized []= '*';
+					continue;
+				}
+				if( '' === $segment || ! ctype_digit( $segment ) ) {
+					return null;
+				}
+				$value = (int) $segment;
+				if( $value < 0 || $value > 255 ) {
+					return null;
+				}
+				$normalized []= (string) $value;
+			}
+			return implode( '.', $normalized );
+		}
+
+		function normalize_ipv6_rule( $rule ) {
+			if( preg_match( '/[^0-9a-f:\*]/', $rule ) ) {
+				return null;
+			}
+			if( substr_count( $rule, '::' ) > 1 ) {
+				return null;
+			}
+			$double_colon_pos = strpos( $rule, '::' );
+			if( false !== $double_colon_pos ) {
+				$left_part = substr( $rule, 0, $double_colon_pos );
+				$right_part = substr( $rule, $double_colon_pos + 2 );
+				$left = '' === $left_part ? array() : explode( ':', $left_part );
+				$right = '' === $right_part ? array() : explode( ':', $right_part );
+			} else {
+				$left = explode( ':', $rule );
+				$right = array();
+			}
+
+			$left = $this->normalize_ipv6_rule_groups( $left );
+			$right = $this->normalize_ipv6_rule_groups( $right );
+			if( null === $left || null === $right ) {
+				return null;
+			}
+
+			$total_groups = count( $left ) + count( $right );
+			if( false === $double_colon_pos ) {
+				if( 8 !== $total_groups ) {
+					return null;
+				}
+				$groups = array_merge( $left, $right );
+			} else {
+				if( $total_groups >= 8 ) {
+					return null;
+				}
+				$groups = array_merge( $left, array_fill( 0, 8 - $total_groups, '0' ), $right );
+			}
+
+			return implode( ':', $groups );
+		}
+
+		function normalize_ipv6_rule_groups( $groups ) {
+			$normalized = array();
+			foreach ( $groups as $group ) {
+				if( '' === $group ) {
+					return null;
+				}
+				if( '*' === $group ) {
+					$normalized []= '*';
+					continue;
+				}
+				if( ! preg_match( '/^[0-9a-f]{1,4}$/', $group ) ) {
+					return null;
+				}
+				$normalized []= strtolower( dechex( hexdec( $group ) ) );
+			}
+			return $normalized;
+		}
+
+		function get_ip_version( $ip ) {
+			if( false !== strpos( $ip, ':' ) ) {
+				return 6;
+			}
+			if( false !== strpos( $ip, '.' ) ) {
+				return 4;
+			}
+			return null;
+		}
+
+		function get_rule_version( $rule ) {
+			return $this->get_ip_version( $rule );
+		}
+
+		function get_ip_segments( $ip, $version ) {
+			if( 4 === $version ) {
+				return explode( '.', $ip );
+			}
+			return $this->expand_ipv6_to_groups( $ip );
+		}
+
+		function get_rule_segments( $rule, $version ) {
+			if( 4 === $version ) {
+				return explode( '.', $rule );
+			}
+			return explode( ':', $rule );
+		}
+
+		function expand_ipv6_to_groups( $ip ) {
+			$binary = @inet_pton( $ip );
+			if( false === $binary ) {
+				return array();
+			}
+			$hex = unpack( 'H*', $binary );
+			$groups = str_split( $hex[1], 4 );
+			return array_map( array( $this, 'normalize_ipv6_group' ), $groups );
+		}
+
+		function normalize_ipv6_group( $group ) {
+			$group = strtolower( ltrim( $group, '0' ) );
+			return '' === $group ? '0' : $group;
+		}
+
+		function deduplicate_ip_rules( $rules ) {
+			$deduplicated = array();
+			foreach ( $rules as $rule ) {
+				if( ! in_array( $rule, $deduplicated, true ) ) {
+					$deduplicated []= $rule;
+				}
+			}
+			return array_values( $deduplicated );
 		}
 
 	} // class end

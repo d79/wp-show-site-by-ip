@@ -100,7 +100,7 @@
 				<div id="wssbi_iplist_wrap">
 					<div id="wssbi_iplist"><?php echo join("\n", $ips); ?></div>
 				</div>
-				<p class="description"><?php _e('Insert one IP address for line', 'wp-show-site-by-ip'); ?><br><?php _e('Wildcards allowed (e.g. <code>123.123.123.*</code>)', 'wp-show-site-by-ip'); ?></p>
+				<p class="description"><?php _e('Insert one IP rule per line', 'wp-show-site-by-ip'); ?><br><?php _e('Supported: IPv4, IPv6 and full-segment wildcards (e.g. <code>123.123.123.*</code> or <code>2001:db8:*:*:*:*:*:*</code>)', 'wp-show-site-by-ip'); ?><br><?php _e('The plugin currently checks only <code>REMOTE_ADDR</code> and does not automatically trust proxy/CDN headers.', 'wp-show-site-by-ip'); ?></p>
 			</td>
 		</tr>
 	</table>
