@@ -111,14 +111,21 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function check () {
 			$ip = $this->ip();
 			$options =& $this->options;
+			$options_modified = false;
 			if(isset($_GET[$options['wordOk']]) && !$this->_ip_in_ips($ip)) {
 				$options['ips'] []= $ip;
+				$options_modified = true;
 			}
 			if(isset($_GET[$options['wordKo']]) && $this->_ip_in_ips($ip)) {
 				$options['ips'] = array_diff($options['ips'], array($ip));
+				$options_modified = true;
 			}
-			update_option( 'wssbi_settings', $options );
-			if(!wp_doing_cron() && ($options['enabled'] && !$this->_ip_in_ips($ip))) {
+			if( $options_modified ) {
+				update_option( 'wssbi_settings', $options );
+			}
+			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->_ip_in_ips($ip);
+			$show_temp_page = apply_filters( 'wssbi_show_temp_page', $show_temp_page, $ip, $options );
+			if( $show_temp_page ) {
 				header('HTTP/1.1 '.$options['http']);
 				header('Retry-After: 3600');
 				extract($options);
