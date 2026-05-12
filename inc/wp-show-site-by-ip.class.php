@@ -356,6 +356,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				return null;
 			}
 			$ip = trim( $ip );
+			// Loopback addresses such as 127.0.0.1 and ::1 are valid whitelist entries.
 			if( '' === $ip || ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {
 				return null;
 			}

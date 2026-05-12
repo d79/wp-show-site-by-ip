@@ -32,6 +32,8 @@ That link open the plugin configuration page, where you can upload the full HTML
 
 The whitelist accepts one rule per line and supports IPv4, IPv6 and full-segment wildcards such as `123.123.123.*` or `2001:db8:*:*:*:*:*:*`.
 
+Loopback addresses such as `127.0.0.1` and `::1` are valid whitelist entries too.
+
 Comment lines are supported only when they start with `#`, for example `# office`.
 
 For security, the plugin currently checks only `REMOTE_ADDR` and does not automatically trust proxy or CDN headers such as `X-Forwarded-For`.

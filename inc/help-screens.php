@@ -38,7 +38,7 @@ $screen->add_help_tab( array(
 		__( "After installed this plugin, you'll find the submenu <b>Show Site by IP</b> on your website Dashboard, under the <b>Tools</b> menu.", 'wp-show-site-by-ip' ),
 		__( "That link open the plugin configuration page, where you can insert the full HTML of your temporary page and, when you are good to go, enable the IP filter.", 'wp-show-site-by-ip' ),
 		__( "Your IP will be automatically added to the whitelist in order for you to continue to use your website.", 'wp-show-site-by-ip' ),
-		__( "The IP whitelist accepts one rule per line and supports comment lines starting with <code>#</code>.", 'wp-show-site-by-ip' ),
+		__( "The IP whitelist accepts one rule per line, supports comment lines starting with <code>#</code>, and also accepts loopback addresses such as <code>127.0.0.1</code> and <code>::1</code>.", 'wp-show-site-by-ip' ),
 		__( "You can also add URL whitelist strings: when the current request URL contains one of them, the website is shown for that request without saving the visitor IP.", 'wp-show-site-by-ip' ),
 		__( "To allow access to your website from an internet connection add the string <code>?wpok</code> to the website URL, like this:", 'wp-show-site-by-ip' ),
 		__( "To remove your IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string <code>?wpko</code> to the website URL, like this:", 'wp-show-site-by-ip' ),
@@ -81,7 +81,7 @@ $screen->add_help_tab( array(
 		</p>
 		<p>
 			<strong>'.__('IPs list', 'wp-show-site-by-ip').'</strong><br>
-			'.__("It's the list of authorized IPs and can be manually edited. Comment lines starting with # are ignored.", 'wp-show-site-by-ip').'
+			'.__("It's the list of authorized IPs and can be manually edited. Comment lines starting with # are ignored, and loopback addresses such as 127.0.0.1 and ::1 are valid entries.", 'wp-show-site-by-ip').'
 		</p>
 		<p>
 			<strong>'.__('URL whitelist', 'wp-show-site-by-ip').'</strong><br>
