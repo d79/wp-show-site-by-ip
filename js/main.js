@@ -52,53 +52,27 @@ jQuery(document).ready(function($){
 	});
 
 	/* INIT ACE EDITOR */
-	const editor = ace.edit("wssbi_head");
-	editor.setTheme("ace/theme/tomorrow");
-	editor.getSession().setMode("ace/mode/html");
-	editor.getSession().setUseWorker(false);
-	editor.setHighlightActiveLine(false);
-	editor.getSession().setUseWrapMode(true);
-	editor.setShowPrintMargin(false);
-	const textarea = $('#wssbi_head_textarea');
-	editor.getSession().setValue(textarea.val());
-	editor.getSession().on('change', function(){
-		textarea.val(editor.getSession().getValue());
-	});
-	editor.on("change", function() {
-		window.wssbi_form_changed = true;
-	});
+	function initAceEditor(editorId, textareaSelector, mode) {
+		const editor = ace.edit(editorId);
+		const textarea = $(textareaSelector);
+		editor.setTheme("ace/theme/tomorrow");
+		editor.getSession().setMode(mode);
+		editor.getSession().setUseWorker(false);
+		editor.setHighlightActiveLine(false);
+		editor.getSession().setUseWrapMode(true);
+		editor.setShowPrintMargin(false);
+		editor.getSession().setValue(textarea.val());
+		editor.getSession().on('change', function(){
+			textarea.val(editor.getSession().getValue());
+		});
+		editor.on("change", function() {
+			window.wssbi_form_changed = true;
+		});
+	}
 
-	const editor2 = ace.edit("wssbi_iplist");
-	editor2.setTheme("ace/theme/tomorrow");
-	editor2.getSession().setMode("ace/mode/html");
-	editor2.getSession().setUseWorker(false);
-	editor2.setHighlightActiveLine(false);
-	editor2.getSession().setUseWrapMode(true);
-	editor2.setShowPrintMargin(false);
-	const textarea2 = $('#wssbi_iplist_textarea');
-	editor2.getSession().setValue(textarea2.val());
-	editor2.getSession().on('change', function(){
-		textarea2.val(editor2.getSession().getValue());
-	});
-	editor2.on("change", function() {
-		window.wssbi_form_changed = true;
-	});
-
-	const editor3 = ace.edit("wssbi_url_whitelist");
-	editor3.setTheme("ace/theme/tomorrow");
-	editor3.getSession().setMode("ace/mode/html");
-	editor3.getSession().setUseWorker(false);
-	editor3.setHighlightActiveLine(false);
-	editor3.getSession().setUseWrapMode(true);
-	editor3.setShowPrintMargin(false);
-	const textarea3 = $('#wssbi_url_whitelist_textarea');
-	editor3.getSession().setValue(textarea3.val());
-	editor3.getSession().on('change', function(){
-		textarea3.val(editor3.getSession().getValue());
-	});
-	editor3.on("change", function() {
-		window.wssbi_form_changed = true;
-	});
+	initAceEditor("wssbi_head", '#wssbi_head_textarea', "ace/mode/html");
+	initAceEditor("wssbi_iplist", '#wssbi_iplist_textarea', "ace/mode/html");
+	initAceEditor("wssbi_url_whitelist", '#wssbi_url_whitelist_textarea', "ace/mode/html");
 
 	/* DELETE OLD HTML */
 	$('#wssbi-old-html-notice .forget').click(function() {

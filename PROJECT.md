@@ -14,6 +14,7 @@ WP Show Site by IP e un plugin WordPress per nascondere il sito ai visitatori no
 - `parts/`: template e contenuti predefiniti della pagina temporanea pubblica.
 - `js/main.js`: tab della pagina impostazioni, editor Ace, warning modifiche non salvate, tooltip e Ajax per vecchio HTML.
 - `css/main.css`: stile della pagina impostazioni.
+- `docs/manual-test-checklist.md`: checklist manuale per verifiche runtime, admin e bypass.
 - `lib/`: librerie frontend vendorizzate, attualmente Ace, Prism e tlite.
 - `languages/`: file di traduzione e template POT.
 - `.github/workflows/deploy.yml`: deploy su WordPress.org al push di un tag.
@@ -108,3 +109,7 @@ Non sono presenti shortcode, REST route o endpoint pubblici dedicati. L'unico en
 ## Rilascio
 
 Il workflow GitHub Actions pubblica su WordPress.org quando viene pushato un tag. Non c'e un build step attivo: i file inclusi nel repository sono quelli distribuiti, salvo esclusioni in `.distignore`.
+
+## Verifiche manuali
+
+La checklist in `docs/manual-test-checklist.md` documenta i controlli manuali consigliati dopo modifiche a salvataggio opzioni, IP rules, whitelist URL, bypass tecnici, editor della pagina temporanea e avvisi admin. Il progetto mantiene una classe principale unica per compatibilita e semplicita distributiva; eventuali split strutturali vanno pianificati separatamente.

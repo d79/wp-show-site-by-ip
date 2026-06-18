@@ -1,8 +1,10 @@
 /.wordpress-org
 /.git
 /.github
+.agents
 
 .distignore
 .gitignore
 AGENTS.md
 PROJECT.md
+docs/
