@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-13 16:44+0000\n"
+"POT-Creation-Date: 2026-06-18 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -388,4 +388,92 @@ msgstr ""
 msgid ""
 "Your IP will be automatically added to the whitelist in order for you to "
 "continue to use your website."
+msgstr ""
+
+#: inc/wp-show-site-by-ip.class.php:246
+msgid ""
+"Warning: the access string is still the default \"wpok\". It is convenient, "
+"but predictable; consider changing it in the plugin settings."
+msgstr ""
+
+#: tpls/settings-form.php:58
+msgid "This removes only exact IP entries; wildcard rules must be edited manually."
+msgstr ""
+
+#: tpls/settings-form.php:104
+msgid "Insert one IP rule per line"
+msgstr ""
+
+#: tpls/settings-form.php:104
+msgid ""
+"Supported: IPv4, IPv6, loopback addresses such as <code>127.0.0.1</code> "
+"and <code>::1</code>, and full-segment wildcards (e.g. "
+"<code>123.123.123.*</code> or <code>2001:db8:*:*:*:*:*:*</code>)"
+msgstr ""
+
+#: tpls/settings-form.php:104
+msgid ""
+"In the IP list, comments can start a line or follow a rule after <code>#</"
+"code> (e.g. <code>123.123.123.* # office LAN</code>)."
+msgstr ""
+
+#: tpls/settings-form.php:104
+msgid ""
+"The plugin currently checks only <code>REMOTE_ADDR</code> and does not "
+"automatically trust proxy/CDN headers."
+msgstr ""
+
+#: tpls/settings-form.php:109
+msgid "URL whitelist"
+msgstr ""
+
+#: tpls/settings-form.php:110
+msgid "Here you can allow requests whose URL contains one of the following strings."
+msgstr ""
+
+#: tpls/settings-form.php:115
+msgid ""
+"Insert one string per line. Each string is searched literally inside path and "
+"query of the current URL."
+msgstr ""
+
+#: tpls/settings-form.php:115
+msgid ""
+"Matching a string bypasses the temporary page only for the current request "
+"and does not save the visitor IP."
+msgstr ""
+
+#: inc/help-screens.php:41
+msgid ""
+"The IP whitelist accepts one rule per line, supports full-line and inline "
+"comments after <code>#</code>, and also accepts loopback addresses such as "
+"<code>127.0.0.1</code> and <code>::1</code>."
+msgstr ""
+
+#: inc/help-screens.php:44
+msgid ""
+"Wildcard rules must be edited manually. To remove your exact IP from the "
+"whitelist afterwards (and then go back to see the temporary page instead of "
+"your website) add the string <code>?wpko</code> to the website URL, like this:"
+msgstr ""
+
+#: inc/help-screens.php:68
+msgid ""
+"It's the string this plugin will look for in the URL to deny access to the "
+"website: if found, the exact IP from which the user is connecting will be "
+"removed from the whitelist, and then the temporary page will be shown. "
+"Wildcard rules are not removed by this URL string and must be edited manually."
+msgstr ""
+
+#: inc/help-screens.php:84
+msgid ""
+"It's the list of authorized IPs and can be manually edited. In the IP list, "
+"comments can start a line or follow a rule after #, and loopback addresses "
+"such as 127.0.0.1 and ::1 are valid entries."
+msgstr ""
+
+#: inc/help-screens.php:88
+msgid ""
+"It's the list of URL strings that temporarily bypass the maintenance page for "
+"the current request only, without saving the visitor IP."
 msgstr ""

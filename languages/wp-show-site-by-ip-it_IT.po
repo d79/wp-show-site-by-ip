@@ -3,23 +3,23 @@ msgstr ""
 "Project-Id-Version: WP Show Site by IP\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-22 04:24+0000\n"
-"PO-Revision-Date: 2023-03-13 16:49+0000\n"
-"Last-Translator: Dario Candelù <nospamthanks@wordpress.org>\n"
+"PO-Revision-Date: 2026-06-18 18:05+0200\n"
+"Last-Translator: d79\n"
 "Language-Team: Italiano\n"
 "Language: it_IT\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: inc/help-screens.php:52
 msgid ""
-"Activate or deactivate the IP filter: when enabled everyone but who gained "
-"access to the whitelist of IP addresses will see the temporary page."
+"Activate or deactivate the IP filter: when enabled everyone but who gained access "
+"to the whitelist of IP addresses will see the temporary page."
 msgstr ""
-"Attivare o disattivare il filtro IP: se abilitato, chi non ha inserito l'IP "
-"della propria connessione nella whitelist vedrà la pagina temporanea."
+"Attivare o disattivare il filtro IP: se abilitato, chi non ha inserito l'IP della "
+"propria connessione nella whitelist vedrà la pagina temporanea."
 
 #: wp-show-site-by-ip.php:189
 msgctxt "admin toolbar link"
@@ -33,11 +33,11 @@ msgstr "Filtro per IP abilitato"
 
 #: inc/help-screens.php:36
 msgid ""
-"After installed this plugin, you'll find the submenu <b>Show Site by IP</b> "
-"on your website Dashboard, under the <b>Tools</b> menu."
+"After installed this plugin, you'll find the submenu <b>Show Site by IP</b> on "
+"your website Dashboard, under the <b>Tools</b> menu."
 msgstr ""
-"Dopo aver installato il plugin, si può trovare la voce <b>Mostra sito per "
-"IP</b> nella Bacheca del sito, nel menù <b>Strumenti</b>."
+"Dopo aver installato il plugin, si può trovare la voce <b>Mostra sito per IP</b> "
+"nella Bacheca del sito, nel menù <b>Strumenti</b>."
 
 #: wp-show-site-by-ip.php:104
 msgid "Are you sure? The code will be definitely deleted"
@@ -54,12 +54,12 @@ msgstr "Contenuto body"
 #: inc/help-screens.php:56
 msgid ""
 "Choose the  Hypertext Transfer Protocol (HTTP) response status code for the "
-"temporary page. This is useful mainly for communicating the temporary status "
-"of the website to the search engines."
+"temporary page. This is useful mainly for communicating the temporary status of "
+"the website to the search engines."
 msgstr ""
-"Scegliere il codice di stato della risposta Hypertext Transfer Protocol "
-"(HTTP) per la pagina temporanea. Ciò è utile principalmente per comunicare "
-"lo stato provvisorio del sito web ai motori di ricerca."
+"Scegliere il codice di stato della risposta Hypertext Transfer Protocol (HTTP) "
+"per la pagina temporanea. Ciò è utile principalmente per comunicare lo stato "
+"provvisorio del sito web ai motori di ricerca."
 
 #: inc/settings-form.php:26
 #, php-format
@@ -72,8 +72,7 @@ msgstr ""
 
 #: inc/settings-form.php:15
 msgid "Don't worry, your IP will be automatically added to the whitelist"
-msgstr ""
-"Non preoccuparti, il tuo IP verrà aggiunto automaticamente alla whitelist"
+msgstr "Non preoccuparti, il tuo IP verrà aggiunto automaticamente alla whitelist"
 
 #: inc/help-screens.php:51 inc/settings-form.php:9
 msgid "Enable filter"
@@ -85,15 +84,15 @@ msgstr "Abilita o disabilita il filtro IP"
 
 #: inc/help-screens.php:33
 msgid ""
-"Even better you don't have to find out your IP and then save it on some sort "
-"of whitelist, you can simply add the string <code>wpok</code> to you url to "
-"automatically obtain the permission to see your website, without even "
-"knowing your IP!!!"
+"Even better you don't have to find out your IP and then save it on some sort of "
+"whitelist, you can simply add the string <code>wpok</code> to you url to "
+"automatically obtain the permission to see your website, without even knowing "
+"your IP!!!"
 msgstr ""
-"Ancora meglio non c'è bisogno di sapere il proprio indirizzo IP e poi "
-"salvarlo su una qualche whitelist, si può semplicemente aggiungere una "
-"stringa personalizzabile all'URL per ottenere automaticamente il permesso di "
-"vedere il proprio sito web!"
+"Ancora meglio non c'è bisogno di sapere il proprio indirizzo IP e poi salvarlo su "
+"una qualche whitelist, si può semplicemente aggiungere una stringa "
+"personalizzabile all'URL per ottenere automaticamente il permesso di vedere il "
+"proprio sito web!"
 
 #: inc/old-html-notice.php:12
 msgid "Forget old code"
@@ -117,8 +116,8 @@ msgstr "Qui puoi modificare manualmente la lista di IP autorizzati"
 
 #. Description of the plugin
 msgid ""
-"Hide the website to unknown IPs and show a temporary and fully customizable "
-"page instead."
+"Hide the website to unknown IPs and show a temporary and fully customizable page "
+"instead."
 msgstr ""
 "Nascondi il sito a IP sconosciuti e mostra invece una pagina temporanea e "
 "completamente personalizzata."
@@ -128,9 +127,9 @@ msgid ""
 "Hide your Wordpress website to unknown IPs and replace it with a HTML page. "
 "Useful for developers to work online in private (e.g. maintenance)."
 msgstr ""
-"Nascondi il tuo sito Wordpress ad IP sconosciuti e sostituiscilo con una "
-"pagina HTML. Utile per sviluppatori che necessitano di lavorare online in "
-"privato (es. manutenzione)."
+"Nascondi il tuo sito Wordpress ad IP sconosciuti e sostituiscilo con una pagina "
+"HTML. Utile per sviluppatori che necessitano di lavorare online in privato (es. "
+"manutenzione)."
 
 #: inc/help-screens.php:35
 msgid "How it works"
@@ -164,19 +163,18 @@ msgstr ""
 #: inc/settings-sidebar.php:31
 #, php-format
 msgid ""
-"If this plugin helped, please consider %s rewarding it with 5 stars %s thank "
-"you!"
+"If this plugin helped, please consider %s rewarding it with 5 stars %s thank you!"
 msgstr ""
-"Se il plugin è stato d'aiuto, fallo sapere %s ricompensandolo con 5 stelle "
-"%s grazie!"
+"Se il plugin è stato d'aiuto, fallo sapere %s ricompensandolo con 5 stelle %s "
+"grazie!"
 
 #: inc/help-pointer.php:16
 msgid ""
-"If you want to better understand how this plugin works, please take "
-"advantage of the help inline to find the answers you need."
+"If you want to better understand how this plugin works, please take advantage of "
+"the help inline to find the answers you need."
 msgstr ""
-"Se vuoi capire meglio il funzionamento del plugin, approfitta della guida "
-"online per trovare le risposte che cerchi."
+"Se vuoi capire meglio il funzionamento del plugin, approfitta della guida online "
+"per trovare le risposte che cerchi."
 
 #: inc/settings-form.php:103
 msgid "Insert one IP address for line"
@@ -188,11 +186,11 @@ msgstr "Lista IP"
 
 #: inc/help-screens.php:68
 msgid "It's the content of the title tag of the temporary page."
-msgstr "E' il contenuto del tag title (cioè il titolo) della pagina temporanea"
+msgstr "E' il contenuto del tag title (cioè il titolo) della pagina temporanea."
 
 #: inc/help-screens.php:72
 msgid "It's the HTML content of the body tag of the temporary page."
-msgstr "E' il contenuto HTML del tag body della pagina temporanea"
+msgstr "E' il contenuto HTML del tag body della pagina temporanea."
 
 #: inc/help-screens.php:80
 msgid "It's the list of authorized IPs and can be manually edited."
@@ -201,22 +199,22 @@ msgstr "È la lista di IP autorizzati e può essere modificata manualmente."
 #: inc/help-screens.php:64
 msgid ""
 "It's the string this plugin will look for in the URL to deny access to the "
-"website: if found, the IP from which the user is connecting will be removed "
-"from the whitelist, and then the temporary page will be shown."
+"website: if found, the IP from which the user is connecting will be removed from "
+"the whitelist, and then the temporary page will be shown."
 msgstr ""
-"E' la stringa che il plugin cercherà nell'URL per negare l'accesso al sito "
-"web: se trovata, l'IP da cui l'utente si connette verrà rimosso dalla "
-"whitelist, e perciò verrà visualizzata la pagina temporanea."
+"E' la stringa che il plugin cercherà nell'URL per negare l'accesso al sito web: "
+"se trovata, l'IP da cui l'utente si connette verrà rimosso dalla whitelist, e "
+"perciò verrà visualizzata la pagina temporanea."
 
 #: inc/help-screens.php:60
 msgid ""
 "It's the string this plugin will look for in the URL to grant access to the "
-"website: if found, the IP from which the user is connecting will be added to "
-"the whitelist, allowing him to see the website."
+"website: if found, the IP from which the user is connecting will be added to the "
+"whitelist, allowing him to see the website."
 msgstr ""
-"E' la stringa che il plugin cercherà nell'URL per concedere l'accesso al "
-"sito web: se trovata, l'IP da cui l'utente si connette verrà aggiunto alla "
-"whitelist, e avrà il permesso di vedere il sito."
+"E' la stringa che il plugin cercherà nell'URL per concedere l'accesso al sito "
+"web: se trovata, l'IP da cui l'utente si connette verrà aggiunto alla whitelist, "
+"e avrà il permesso di vedere il sito."
 
 #: wp-show-site-by-ip.php:64
 msgctxt "menu title"
@@ -242,11 +240,11 @@ msgstr "Guida del plugin"
 
 #: inc/settings-sidebar.php:7
 msgid "Plugin Homepage"
-msgstr ""
+msgstr "Homepage del plugin"
 
 #: inc/settings-sidebar.php:2
 msgid "Plugin info"
-msgstr ""
+msgstr "Informazioni plugin"
 
 #: inc/help-screens.php:87
 msgid "Plugin Support Forum"
@@ -270,15 +268,15 @@ msgstr "Mostra Sito per IP"
 
 #: inc/help-screens.php:30
 msgid ""
-"Sometimes you need to work directly on your online Wordpress installation, "
-"like when you are developing or refining a theme for your site, and you "
-"don't want others to see your work in progress, but at the same time you "
-"need to be able to see it from whatever place you find yourself!!!"
+"Sometimes you need to work directly on your online Wordpress installation, like "
+"when you are developing or refining a theme for your site, and you don't want "
+"others to see your work in progress, but at the same time you need to be able to "
+"see it from whatever place you find yourself!!!"
 msgstr ""
-"A volte è necessario lavorare direttamente sul proprio sito Wordpress online,"
-" come quando si sta sviluppando o perfezionando un tema, e non si vuole far "
-"vedere ad altri il lavoro in corso, ma allo stesso tempo è necessario "
-"poterlo vedere da qualunque posto ci si trovi."
+"A volte è necessario lavorare direttamente sul proprio sito Wordpress online, "
+"come quando si sta sviluppando o perfezionando un tema, e non si vuole far vedere "
+"ad altri il lavoro in corso, ma allo stesso tempo è necessario poterlo vedere da "
+"qualunque posto ci si trovi!"
 
 #: inc/help-screens.php:63 inc/settings-form.php:49
 msgid "String KO"
@@ -323,25 +321,24 @@ msgstr "Titolo pagina"
 
 #: inc/help-screens.php:37
 msgid ""
-"That link open the plugin configuration page, where you can insert the full "
-"HTML of your temporary page and, when you are good to go, enable the IP "
-"filter."
+"That link open the plugin configuration page, where you can insert the full HTML "
+"of your temporary page and, when you are good to go, enable the IP filter."
 msgstr ""
-"Il collegamento apre la pagina di configurazione del plugin, in cui è "
-"possibile inserire il codice HTML completo della pagina temporanea e, al "
-"momento utile, attivare il filtro IP."
+"Il collegamento apre la pagina di configurazione del plugin, in cui è possibile "
+"inserire il codice HTML completo della pagina temporanea e, al momento utile, "
+"attivare il filtro IP."
 
 #: inc/help-screens.php:34
 msgid ""
-"That makes it easier to work on your website from many different places (e.g."
-" if you work on it with other people from different locations) or if you "
-"have an internet connection with dynamic IP (everytime it changes you can "
-"easily add the new one)."
+"That makes it easier to work on your website from many different places (e.g. if "
+"you work on it with other people from different locations) or if you have an "
+"internet connection with dynamic IP (everytime it changes you can easily add the "
+"new one)."
 msgstr ""
 "Questo rende più facile lavorare al proprio sito web da luoghi diversi (ad "
-"esempio, se si lavora con altre persone da postazioni diverse), o se si "
-"dispone di una connessione ad internet con IP dinamico (ogni volta che "
-"cambia è possibile aggiungere facilmente quello nuovo)."
+"esempio, se si lavora con altre persone da postazioni diverse), o se si dispone "
+"di una connessione ad internet con IP dinamico (ogni volta che cambia è possibile "
+"aggiungere facilmente quello nuovo)."
 
 #: inc/help-screens.php:41
 msgid "That's it. 🙂"
@@ -357,22 +354,22 @@ msgstr "L'editor della pagina temporanea è cambiato."
 
 #: inc/help-screens.php:76
 msgid ""
-"This code will be loaded inside the head tag of the temporary page, and it "
-"allows to add some styles (CSS) and scripts (Javascript) to the page, even "
-"from external resources."
+"This code will be loaded inside the head tag of the temporary page, and it allows "
+"to add some styles (CSS) and scripts (Javascript) to the page, even from external "
+"resources."
 msgstr ""
-"Questo codice verrà caricato all'interno del tag head della pagina "
-"temporanea, e permette di aggiungere alcuni stili (CSS) e script (JavaScript)"
-" alla pagina, anche da risorse esterne."
+"Questo codice verrà caricato all'interno del tag head della pagina temporanea, e "
+"permette di aggiungere alcuni stili (CSS) e script (JavaScript) alla pagina, "
+"anche da risorse esterne."
 
 #: inc/help-screens.php:32
 msgid ""
-"This plugin allows you very easily to load a temporary HTML page for your "
-"website visitors, but it filters the IP of your connection and let you see "
-"your website and work on it."
+"This plugin allows you very easily to load a temporary HTML page for your website "
+"visitors, but it filters the IP of your connection and let you see your website "
+"and work on it."
 msgstr ""
-"Questo plugin permette facilmente di caricare una pagina HTML temporanea per "
-"i visitatori, ma filtra l'IP della propria connessione, consentendo così di "
+"Questo plugin permette facilmente di caricare una pagina HTML temporanea per i "
+"visitatori, ma filtra l'IP della propria connessione, consentendo così di "
 "lavorare direttamente sul sito."
 
 #: inc/settings-form.php:72
@@ -381,22 +378,21 @@ msgstr "Tag title della pagina temporanea"
 
 #: inc/help-screens.php:39
 msgid ""
-"To allow access to your website from an internet connection add the string "
-"<code>?wpok</code> to the website URL, like this:"
+"To allow access to your website from an internet connection add the string <code>?"
+"wpok</code> to the website URL, like this:"
 msgstr ""
-"Per consentire l'accesso al tuo sito web da una connessione internet "
-"aggiungere la stringa <code>?wpok</code> in coda all'URL del sito web, in "
-"questo modo:"
+"Per consentire l'accesso al tuo sito web da una connessione internet aggiungere "
+"la stringa <code>?wpok</code> in coda all'URL del sito web, in questo modo:"
 
 #: inc/help-screens.php:40
 msgid ""
 "To remove your IP from the whitelist afterwards (and then go back to see the "
-"temporary page instead of your website) add the string <code>?wpko</code> to "
-"the website URL, like this:"
+"temporary page instead of your website) add the string <code>?wpko</code> to the "
+"website URL, like this:"
 msgstr ""
-"Per rimuovere il tuo IP dalla whitelist (e quindi vedere la pagina "
-"temporanea invece del sito) aggiungere la stringa <code>?wpko</code> in coda "
-"all'URL, in questo modo:"
+"Per rimuovere il tuo IP dalla whitelist (e quindi vedere la pagina temporanea "
+"invece del sito) aggiungere la stringa <code>?wpko</code> in coda all'URL, in "
+"questo modo:"
 
 #: inc/settings-form.php:56
 #, php-format
@@ -416,8 +412,8 @@ msgstr "Vedi vecchio codice"
 
 #: wp-show-site-by-ip.php:172
 msgid ""
-"Warning: the filter by IP is enabled. Your users are seeing the temporary "
-"page instead of your website."
+"Warning: the filter by IP is enabled. Your users are seeing the temporary page "
+"instead of your website."
 msgstr ""
 "Attenzione: il filtro per IP è attivo. I visitatori stanno vedendo la pagina "
 "temporanea invece del sito."
@@ -440,8 +436,128 @@ msgstr "Il tuo IP attuale non verrà rimosso"
 
 #: inc/help-screens.php:38
 msgid ""
-"Your IP will be automatically added to the whitelist in order for you to "
-"continue to use your website."
+"Your IP will be automatically added to the whitelist in order for you to continue "
+"to use your website."
 msgstr ""
-"Il tuo IP verrà aggiunto automaticamente alla whitelist, in modo da "
-"permetterti di continuare ad utilizzare il sito web."
+"Il tuo IP verrà aggiunto automaticamente alla whitelist, in modo da permetterti "
+"di continuare ad utilizzare il sito web."
+
+#: inc/wp-show-site-by-ip.class.php:246
+msgid ""
+"Warning: the access string is still the default \"wpok\". It is convenient, but "
+"predictable; consider changing it in the plugin settings."
+msgstr ""
+"Attenzione: la stringa di accesso è ancora quella predefinita \"wpok\". È comoda, "
+"ma prevedibile; valuta di cambiarla nelle impostazioni del plugin."
+
+#: tpls/settings-form.php:58
+msgid "This removes only exact IP entries; wildcard rules must be edited manually."
+msgstr ""
+"Questo rimuove solo le voci IP esatte; le regole wildcard devono essere "
+"modificate manualmente."
+
+#: tpls/settings-form.php:104
+msgid "Insert one IP rule per line"
+msgstr "Inserisci una regola IP per riga"
+
+#: tpls/settings-form.php:104
+msgid ""
+"Supported: IPv4, IPv6, loopback addresses such as <code>127.0.0.1</code> and "
+"<code>::1</code>, and full-segment wildcards (e.g. <code>123.123.123.*</code> or "
+"<code>2001:db8:*:*:*:*:*:*</code>)"
+msgstr ""
+"Supportati: IPv4, IPv6, indirizzi di loopback come <code>127.0.0.1</code> e "
+"<code>::1</code>, e wildcard a segmento intero (es. <code>123.123.123.*</code> o "
+"<code>2001:db8:*:*:*:*:*:*</code>)"
+
+#: tpls/settings-form.php:104
+msgid ""
+"In the IP list, comments can start a line or follow a rule after <code>#</code> "
+"(e.g. <code>123.123.123.* # office LAN</code>)."
+msgstr ""
+"Nella lista IP, i commenti possono iniziare una riga o seguire una regola dopo "
+"<code>#</code> (es. <code>123.123.123.* # LAN ufficio</code>)."
+
+#: tpls/settings-form.php:104
+msgid ""
+"The plugin currently checks only <code>REMOTE_ADDR</code> and does not "
+"automatically trust proxy/CDN headers."
+msgstr ""
+"Il plugin attualmente controlla solo <code>REMOTE_ADDR</code> e non considera "
+"automaticamente affidabili gli header di proxy/CDN."
+
+#: tpls/settings-form.php:109
+msgid "URL whitelist"
+msgstr "Whitelist URL"
+
+#: tpls/settings-form.php:110
+msgid "Here you can allow requests whose URL contains one of the following strings."
+msgstr ""
+"Qui puoi consentire le richieste il cui URL contiene una delle seguenti stringhe."
+
+#: tpls/settings-form.php:115
+msgid ""
+"Insert one string per line. Each string is searched literally inside path and "
+"query of the current URL."
+msgstr ""
+"Inserisci una stringa per riga. Ogni stringa viene cercata letteralmente nel "
+"percorso e nella query dell'URL corrente."
+
+#: tpls/settings-form.php:115
+msgid ""
+"Matching a string bypasses the temporary page only for the current request and "
+"does not save the visitor IP."
+msgstr ""
+"La corrispondenza di una stringa bypassa la pagina temporanea solo per la "
+"richiesta corrente e non salva l'IP del visitatore."
+
+#: inc/help-screens.php:41
+msgid ""
+"The IP whitelist accepts one rule per line, supports full-line and inline "
+"comments after <code>#</code>, and also accepts loopback addresses such as "
+"<code>127.0.0.1</code> and <code>::1</code>."
+msgstr ""
+"La whitelist IP accetta una regola per riga, supporta commenti su riga intera e "
+"commenti inline dopo <code>#</code>, e accetta anche indirizzi di loopback come "
+"<code>127.0.0.1</code> e <code>::1</code>."
+
+#: inc/help-screens.php:44
+msgid ""
+"Wildcard rules must be edited manually. To remove your exact IP from the "
+"whitelist afterwards (and then go back to see the temporary page instead of your "
+"website) add the string <code>?wpko</code> to the website URL, like this:"
+msgstr ""
+"Le regole wildcard devono essere modificate manualmente. Per rimuovere in seguito "
+"il tuo IP esatto dalla whitelist (e quindi tornare a vedere la pagina temporanea "
+"invece del sito), aggiungi la stringa <code>?wpko</code> all'URL del sito, in "
+"questo modo:"
+
+#: inc/help-screens.php:68
+msgid ""
+"It's the string this plugin will look for in the URL to deny access to the "
+"website: if found, the exact IP from which the user is connecting will be removed "
+"from the whitelist, and then the temporary page will be shown. Wildcard rules are "
+"not removed by this URL string and must be edited manually."
+msgstr ""
+"È la stringa che il plugin cercherà nell'URL per negare l'accesso al sito: se "
+"trovata, l'IP esatto da cui l'utente si connette verrà rimosso dalla whitelist e "
+"verrà mostrata la pagina temporanea. Le regole wildcard non vengono rimosse da "
+"questa stringa URL e devono essere modificate manualmente."
+
+#: inc/help-screens.php:84
+msgid ""
+"It's the list of authorized IPs and can be manually edited. In the IP list, "
+"comments can start a line or follow a rule after #, and loopback addresses such "
+"as 127.0.0.1 and ::1 are valid entries."
+msgstr ""
+"È la lista degli IP autorizzati e può essere modificata manualmente. Nella lista "
+"IP, i commenti possono iniziare una riga o seguire una regola dopo #, e gli "
+"indirizzi di loopback come 127.0.0.1 e ::1 sono voci valide."
+
+#: inc/help-screens.php:88
+msgid ""
+"It's the list of URL strings that temporarily bypass the maintenance page for the "
+"current request only, without saving the visitor IP."
+msgstr ""
+"È la lista di stringhe URL che bypassano temporaneamente la pagina di "
+"manutenzione solo per la richiesta corrente, senza salvare l'IP del visitatore."
