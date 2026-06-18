@@ -130,7 +130,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			if( $options_modified ) {
 				update_option( 'wssbi_settings', $options );
 			}
-			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->request_matches_url_whitelist($request_uri, $options['url_whitelist_strings']) && !$this->has_ip_access($ip, $options['ips']);
+			$show_temp_page = !wp_doing_cron() && $options['enabled'] && !$this->request_matches_url_whitelist($request_uri, $options['url_whitelist_strings']) && !$this->has_ip_access($ip, $options['ips']) && !$this->should_bypass_filter();
 			$show_temp_page = apply_filters( 'wssbi_show_temp_page', $show_temp_page, $ip, $options );
 			if( $show_temp_page ) {
 				header('HTTP/1.1 '.$options['http']);
@@ -523,6 +523,100 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function deduplicate_ip_rules( $rules ) {
 			return $this->deduplicate_entries( $rules );
+		}
+
+		function should_bypass_filter() {
+			$uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
+			$path = parse_url($uri, PHP_URL_PATH);
+
+			if (!is_string($path) || $path === '') {
+				return false;
+			}
+
+			$path = '/' . ltrim(rawurldecode($path), '/');
+
+			if (is_admin()) {
+				return true;
+			}
+
+			if (function_exists('wp_doing_ajax') && wp_doing_ajax()) {
+				return true;
+			}
+
+			if (function_exists('wp_doing_cron') && wp_doing_cron()) {
+				return true;
+			}
+
+			$allowed_exact_paths = [
+				'/robots.txt',
+				'/favicon.ico',
+				'/ads.txt',
+				'/app-ads.txt',
+				'/browserconfig.xml',
+				'/site.webmanifest',
+				'/manifest.json',
+				'/.well-known/security.txt',
+			];
+
+			if (in_array($path, $allowed_exact_paths, true)) {
+				return true;
+			}
+
+			$allowed_path_prefixes = [
+				'/.well-known/acme-challenge/',
+				'/wp-json/',
+			];
+
+			foreach ($allowed_path_prefixes as $prefix) {
+				if (strpos($path, $prefix) === 0) {
+					return true;
+				}
+			}
+
+			$allowed_patterns = [
+				'#^/wp-sitemap.*\.xml$#i',
+				'#^/sitemap(_index)?\.xml$#i',
+				'#^/[a-z0-9_\-]+-sitemap.*\.xml$#i',
+			];
+
+			foreach ($allowed_patterns as $pattern) {
+				if (preg_match($pattern, $path)) {
+					return true;
+				}
+			}
+
+			$allowed_static_extensions = [
+				'css',
+				'js',
+				'mjs',
+				'map',
+				'jpg',
+				'jpeg',
+				'png',
+				'gif',
+				'webp',
+				'avif',
+				'svg',
+				'ico',
+				'woff',
+				'woff2',
+				'ttf',
+				'otf',
+				'eot',
+				'pdf',
+				'txt',
+				'xml',
+				'json',
+				'webmanifest',
+			];
+
+			$extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+
+			if ($extension && in_array($extension, $allowed_static_extensions, true)) {
+				return true;
+			}
+
+			return false;
 		}
 
 	} // class end
