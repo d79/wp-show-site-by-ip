@@ -18,8 +18,8 @@ Use this checklist after changes to runtime filtering, settings persistence, IP 
 - Save exact IPv6 and verify it is normalized and preserved.
 - Save loopback entries such as `127.0.0.1` and `::1`.
 - Save full-segment wildcard rules such as `123.123.123.*`.
-- Save comment lines beginning with `#` and verify they are ignored.
-- Save invalid IP rules and verify they are discarded.
+- Save comment lines beginning with `#` and inline comments such as `123.123.123.* # LAN`, then verify comments remain visible after reload and rules still work.
+- Save invalid IP rules and verify they do not grant access, while remaining available in the editor for correction.
 
 ## Access Strings
 
@@ -34,7 +34,7 @@ Use this checklist after changes to runtime filtering, settings persistence, IP 
 - Save one URL whitelist string per line and verify they persist after reload.
 - Visit a URL containing a configured whitelist string and verify the temporary page is bypassed.
 - Visit a URL without matching whitelist strings and verify normal filtering behavior.
-- Add comment lines beginning with `#` and verify they are ignored.
+- Add comment lines beginning with `#` and verify they are ignored, but do not treat inline `#` as a comment in URL whitelist strings.
 
 ## Technical Bypasses
 

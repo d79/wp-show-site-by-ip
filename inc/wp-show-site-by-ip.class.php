@@ -67,8 +67,11 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		/* Options and settings persistence */
 
 		function set_options () {
-			$this->options = wp_parse_args(get_option('wssbi_settings'), array(
+			$settings = get_option('wssbi_settings');
+			$has_raw_ip_list = is_array( $settings ) && array_key_exists( 'ips_raw', $settings );
+			$this->options = wp_parse_args($settings, array(
 				'ips'                   => array(),
+				'ips_raw'               => '',
 				'url_whitelist_strings' => array(),
 				'body'                  => file_get_contents( DIR . 'parts/temp-page-body.html' ),
 				'enabled'               => 0,
@@ -78,10 +81,14 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				'title'                 => 'Website temporarily offline',
 				'head'                  => file_get_contents( DIR . 'parts/temp-page-head.html' )
 			));
+			if( ! $has_raw_ip_list ) {
+				$this->options['ips_raw'] = join("\n", $this->options['ips']);
+			}
 		}
 
 		function page () {
 			extract($this->options);
+			$ip_list_text = $this->get_ip_list_text();
 			$editor = array(
 				'editor_height' => 400
 			);
@@ -119,7 +126,8 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			$url_whitelist_strings = $this->get_post_value( 'wssbi_url_whitelist_strings' );
 			$body = $this->get_post_value( 'wssbieditor', $this->options['body'] );
 			$input['enabled'] = (isset($posted_settings['enabled']) && $posted_settings['enabled']==1) ? 1 : 0;
-			$input['ips']     = null !== $ip_list ? $this->sanitize_ip_rules($ip_list) : $this->options['ips'];
+			$input['ips_raw'] = null !== $ip_list ? $this->normalize_raw_ip_list($ip_list) : $this->options['ips_raw'];
+			$input['ips']     = $this->sanitize_ip_rules($input['ips_raw']);
 			$input['url_whitelist_strings'] = null !== $url_whitelist_strings ? $this->sanitize_url_whitelist_strings($url_whitelist_strings) : $this->options['url_whitelist_strings'];
 			$input['wordOk']  = urlencode(sanitize_title($input['wordOk']));
 			$input['wordOk']  = empty($input['wordOk']) ? 'wpok' : $input['wordOk'];
@@ -128,8 +136,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			$input['title']   = wp_strip_all_tags($input['title'], true);
 			$input['body']    = is_string( $body ) ? $body : $this->options['body'];
 			$input['http']    = $this->sanitize_http_status( $input['http'] );
-			$input['ips']     = $this->add_current_ip_to_rules( $input['ips'] );
-			return $input;
+			return $this->add_current_ip_to_options( $input );
 		}
 
 		private function sanitize_http_status( $status ) {
@@ -137,13 +144,12 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			return ( $status > 100 && $status < 600 ) ? $status : 503;
 		}
 
-		private function add_current_ip_to_rules( $rules ) {
+		private function add_current_ip_to_options( $options ) {
 			$ip = $this->get_client_ip();
-			if( $ip && !in_array($ip, $rules, true) ) {
-				$rules []= $ip;
-				$rules = $this->deduplicate_ip_rules( $rules );
+			if( $ip ) {
+				$options = $this->add_ip_to_options( $ip, $options );
 			}
-			return $rules;
+			return $options;
 		}
 
 		/* Runtime filter */
@@ -154,11 +160,12 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			$options =& $this->options;
 			$options_modified = false;
 			if( isset($_GET[$options['wordOk']]) && $ip && !$this->has_ip_access($ip, $options['ips']) ) {
-				$options['ips'] = $this->add_ip_to_rules( $ip, $options['ips'] );
+				$options = $this->add_ip_to_options( $ip, $options );
 				$options_modified = true;
 			}
 			if( isset($_GET[$options['wordKo']]) && $ip && in_array($ip, $options['ips'], true) ) {
 				$options['ips'] = $this->remove_exact_ip_from_rules( $ip, $options['ips'] );
+				$options['ips_raw'] = $this->remove_exact_ip_from_raw_list( $ip, $options['ips_raw'] );
 				$options_modified = true;
 			}
 			if( $options_modified ) {
@@ -181,6 +188,14 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 				$rules = $this->deduplicate_ip_rules( $rules );
 			}
 			return $rules;
+		}
+
+		private function add_ip_to_options( $ip, $options ) {
+			if( $ip && !in_array($ip, $options['ips'], true) ) {
+				$options['ips'] = $this->add_ip_to_rules( $ip, $options['ips'] );
+				$options['ips_raw'] = $this->append_ip_to_raw_list( $ip, $options['ips_raw'] );
+			}
+			return $options;
 		}
 
 		private function remove_exact_ip_from_rules( $ip, $rules ) {
@@ -312,7 +327,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 		function sanitize_ip_rules( $list ) {
 			$rules = array();
-			foreach ( $this->get_config_lines( $list ) as $line ) {
+			foreach ( $this->get_ip_config_lines( $list ) as $line ) {
 				$rule = $this->sanitize_ip_rule( $line );
 				if( null !== $rule ) {
 					$rules []= $rule;
@@ -566,6 +581,57 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		function normalize_ipv6_group( $group ) {
 			$group = strtolower( ltrim( $group, '0' ) );
 			return '' === $group ? '0' : $group;
+		}
+
+		private function get_ip_list_text() {
+			if( isset( $this->options['ips_raw'] ) && is_string( $this->options['ips_raw'] ) ) {
+				return $this->options['ips_raw'];
+			}
+			return join("\n", $this->options['ips']);
+		}
+
+		private function normalize_raw_ip_list( $list ) {
+			return preg_replace( "/\r\n?/", "\n", (string) $list );
+		}
+
+		private function get_ip_config_lines( $list ) {
+			$lines = explode( "\n", $this->normalize_raw_ip_list( $list ) );
+			$normalized = array();
+			foreach ( $lines as $line ) {
+				$line = $this->strip_ip_inline_comment( $line );
+				if( '' === $line ) {
+					continue;
+				}
+				$normalized []= $line;
+			}
+			return $normalized;
+		}
+
+		private function strip_ip_inline_comment( $line ) {
+			$line = trim( (string) $line );
+			$comment_pos = strpos( $line, '#' );
+			if( false !== $comment_pos ) {
+				$line = substr( $line, 0, $comment_pos );
+			}
+			return trim( $line );
+		}
+
+		private function append_ip_to_raw_list( $ip, $list ) {
+			$list = rtrim( $this->normalize_raw_ip_list( $list ), "\n" );
+			return '' === $list ? $ip : $list . "\n" . $ip;
+		}
+
+		private function remove_exact_ip_from_raw_list( $ip, $list ) {
+			$lines = explode( "\n", $this->normalize_raw_ip_list( $list ) );
+			$kept = array();
+			foreach ( $lines as $line ) {
+				$rule = $this->sanitize_ip_rule( $this->strip_ip_inline_comment( $line ) );
+				if( $rule === $ip ) {
+					continue;
+				}
+				$kept []= $line;
+			}
+			return implode( "\n", $kept );
 		}
 
 		function get_config_lines( $list ) {

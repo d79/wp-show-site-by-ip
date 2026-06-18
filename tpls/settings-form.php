@@ -97,11 +97,11 @@
 			<td>
 				<h4><?php _e('IPs list', 'wp-show-site-by-ip'); ?></h4>
 				<p style="margin: -0.5em 0 1.5em"><?php _e('Here you can manually edit the list of authorized IPs', 'wp-show-site-by-ip'); ?> <span class="wssbi-help-tip" title="<?php _e('Your current IP will not be removed', 'wp-show-site-by-ip'); ?>"></span></p>
-				<textarea id="wssbi_iplist_textarea" name="wssbi_iplist" style="display:none"><?php echo esc_textarea( join("\n", $ips) ); ?></textarea>
+				<textarea id="wssbi_iplist_textarea" name="wssbi_iplist" style="display:none"><?php echo esc_textarea( $ip_list_text ); ?></textarea>
 				<div id="wssbi_iplist_wrap">
-					<div id="wssbi_iplist"><?php echo esc_html( join("\n", $ips) ); ?></div>
+					<div id="wssbi_iplist"><?php echo esc_html( $ip_list_text ); ?></div>
 				</div>
-				<p class="description"><?php _e('Insert one IP rule per line', 'wp-show-site-by-ip'); ?><br><?php _e('Supported: IPv4, IPv6, loopback addresses such as <code>127.0.0.1</code> and <code>::1</code>, and full-segment wildcards (e.g. <code>123.123.123.*</code> or <code>2001:db8:*:*:*:*:*:*</code>)', 'wp-show-site-by-ip'); ?><br><?php _e('Comments are supported only when the line starts with <code>#</code> (e.g. <code># ufficio</code>).', 'wp-show-site-by-ip'); ?><br><?php _e('The plugin currently checks only <code>REMOTE_ADDR</code> and does not automatically trust proxy/CDN headers.', 'wp-show-site-by-ip'); ?></p>
+				<p class="description"><?php _e('Insert one IP rule per line', 'wp-show-site-by-ip'); ?><br><?php _e('Supported: IPv4, IPv6, loopback addresses such as <code>127.0.0.1</code> and <code>::1</code>, and full-segment wildcards (e.g. <code>123.123.123.*</code> or <code>2001:db8:*:*:*:*:*:*</code>)', 'wp-show-site-by-ip'); ?><br><?php _e('In the IP list, comments can start a line or follow a rule after <code>#</code> (e.g. <code>123.123.123.* # office LAN</code>).', 'wp-show-site-by-ip'); ?><br><?php _e('The plugin currently checks only <code>REMOTE_ADDR</code> and does not automatically trust proxy/CDN headers.', 'wp-show-site-by-ip'); ?></p>
 			</td>
 		</tr>
 		<tr valign="top">
@@ -112,7 +112,7 @@
 				<div id="wssbi_url_whitelist_wrap">
 					<div id="wssbi_url_whitelist"><?php echo esc_html( join("\n", $url_whitelist_strings) ); ?></div>
 				</div>
-				<p class="description"><?php _e('Insert one string per line. Each string is searched literally inside path and query of the current URL.', 'wp-show-site-by-ip'); ?><br><?php _e('Comments are supported only when the line starts with <code>#</code>.', 'wp-show-site-by-ip'); ?><br><?php _e('Matching a string bypasses the temporary page only for the current request and does not save the visitor IP.', 'wp-show-site-by-ip'); ?></p>
+				<p class="description"><?php _e('Insert one string per line. Each string is searched literally inside path and query of the current URL.', 'wp-show-site-by-ip'); ?><br><?php _e('Matching a string bypasses the temporary page only for the current request and does not save the visitor IP.', 'wp-show-site-by-ip'); ?></p>
 			</td>
 		</tr>
 	</table>

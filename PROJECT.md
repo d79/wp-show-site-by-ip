@@ -29,6 +29,7 @@ Le impostazioni principali sono salvate in `wssbi_settings`:
 
 - `enabled`: abilita o disabilita il filtro.
 - `ips`: regole IP autorizzate.
+- `ips_raw`: testo della lista IP usato per preservare commenti e formattazione nell'editor.
 - `url_whitelist_strings`: stringhe che bypassano la pagina temporanea per la richiesta corrente.
 - `body`: contenuto HTML del body della pagina temporanea.
 - `head`: contenuto inserito nell'head della pagina temporanea.
@@ -55,9 +56,9 @@ La stringa OK predefinita `wpok` viene mantenuta per compatibilita, ma e prevedi
 
 ## Whitelist IP
 
-La whitelist IP accetta una regola per riga. Le righe vuote e quelle che iniziano con `#` vengono ignorate. Sono supportati IPv4, IPv6, loopback e wildcard a segmento intero, per esempio `123.123.123.*` o `2001:db8:*:*:*:*:*:*`.
+La whitelist IP accetta una regola per riga. Le righe vuote e i commenti con `#` vengono ignorati durante il parsing; nella lista IP il commento puo occupare una riga intera o seguire una regola, per esempio `123.123.123.* # LAN`. Sono supportati IPv4, IPv6, loopback e wildcard a segmento intero, per esempio `123.123.123.*` o `2001:db8:*:*:*:*:*:*`.
 
-La normalizzazione e il matching sono gestiti dalla classe principale con metodi dedicati per IPv4, IPv6, wildcard, deduplicazione e confronto.
+La normalizzazione e il matching usano `ips`, mentre `ips_raw` preserva il testo mostrato nell'editor. La whitelist URL continua a usare commenti solo su riga intera, cosi `#` puo restare parte di una stringa URL.
 
 ## Whitelist URL
 

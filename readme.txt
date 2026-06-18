@@ -37,7 +37,7 @@ The whitelist accepts one rule per line and supports IPv4, IPv6 and full-segment
 
 Loopback addresses such as `127.0.0.1` and `::1` are valid whitelist entries too.
 
-Comment lines are supported only when they start with `#`, for example `# office`.
+In the IP whitelist, comments can start a line or follow a rule after `#`, for example `# office` or `123.123.123.* # office LAN`.
 
 For security, the plugin currently checks only `REMOTE_ADDR` and does not automatically trust proxy or CDN headers such as `X-Forwarded-For`.
 
