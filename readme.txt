@@ -3,8 +3,8 @@ Contributors: d79
 Donate link: http://www.emergency.it/form/donations/
 Tags: hide website, maintenance, ip filter
 Requires at least: 3.0.1
-Tested up to: 6.4.3
-Stable tag: 2.4.0
+Tested up to: 7.0
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,16 @@ Once it's installed, you can activate the plugin clicking “Activate Now”
 3. Default temporary page, fully customizable.
 
 == Changelog ==
+
+= 2.5.0 - 18.06.2026 =
+* Added IPv6 and loopback support for authorized IPs
+* Added URL whitelist for request-level bypasses
+* Added inline comments in the IP whitelist
+* Improved settings validation, escaping and Ajax security
+* Added filterable technical bypasses for WordPress and WooCommerce compatibility
+* Updated Ace editor, Prism assets and Italian translations
+* Added project documentation and manual test checklist
+* Tested on WordPress 7.0
 
 = 2.4.0 - 03.03.2024 =
 * Added support for IP addresses with wildcards
