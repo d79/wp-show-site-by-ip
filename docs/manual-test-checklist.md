@@ -38,8 +38,9 @@ Use this checklist after changes to runtime filtering, settings persistence, IP 
 
 ## Technical Bypasses
 
+- With the filter enabled and no matching IP access, verify WordPress admin pages show the temporary page.
+- Visit `?wpok`, then verify WordPress admin pages are accessible from the authorized IP.
 - With the filter enabled and no matching IP access, verify these requests bypass the temporary page:
-  - WordPress admin pages.
   - Ajax requests.
   - WP Cron.
   - `/wp-json/`.

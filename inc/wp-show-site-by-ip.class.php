@@ -613,10 +613,6 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 
 			$bypass = false;
 
-			if (is_admin()) {
-				$bypass = true;
-			}
-
 			if (function_exists('wp_doing_ajax') && wp_doing_ajax()) {
 				$bypass = true;
 			}

@@ -49,7 +49,7 @@ Il controllo pubblico avviene in `WP_Show_Site_by_IP::check()`, registrato su `p
 4. Se la query contiene la stringa KO configurata, rimuove l'IP esatto dalla whitelist.
 5. Se il filtro e attivo e la richiesta non e autorizzata, include `parts/temp-page-tpl.php` e termina.
 
-Prima di mostrare la pagina temporanea, il plugin esclude richieste amministrative e tecniche tramite `should_bypass_filter()`, compresi admin, Ajax, cron, REST API, sitemap, asset statici e alcuni file noti come `robots.txt`.
+Prima di mostrare la pagina temporanea, il plugin esclude richieste tecniche tramite `should_bypass_filter()`, compresi Ajax, cron, REST API, sitemap, asset statici e alcuni file noti come `robots.txt`. Le pagine `/wp-admin/` non bypassano il filtro: se l'IP non e autorizzato, anche l'area admin mostra la pagina temporanea.
 
 La stringa OK predefinita `wpok` viene mantenuta per compatibilita, ma e prevedibile. Il plugin mostra un avviso admin non bloccante quando resta invariata, invitando a personalizzarla.
 
@@ -67,7 +67,7 @@ La whitelist URL contiene una stringa per riga. Se la request URI contiene una d
 
 Il contenuto `head` e `body` della pagina temporanea e HTML fidato: puo includere markup, CSS e JavaScript e viene pensato per amministratori affidabili. Abbassare la capability tramite `wssbi_manage_options` puo quindi esporre il sito a utenti meno fidati.
 
-I bypass tecnici privilegiano compatibilita con WordPress, WooCommerce, REST API, sitemap, asset statici e challenge `.well-known/acme-challenge/`. I default sono volutamente permissivi per evitare rotture operative quando il filtro IP e attivo.
+I bypass tecnici privilegiano compatibilita con WordPress, WooCommerce, REST API, sitemap, asset statici e challenge `.well-known/acme-challenge/`. I default sono volutamente permissivi per evitare rotture operative quando il filtro IP e attivo, ma non includono le pagine `/wp-admin/`.
 
 I bypass sono estendibili tramite filtri dedicati:
 

@@ -19,6 +19,7 @@ Sometimes you need to work directly on your online Wordpress installation, like 
 
 = What it does =
 This plugin allows you very easily to load a temporary HTML page for your website visitors, but it filters the IP of your connection and let you see your website and work on it.
+When the filter is enabled, unauthorized visitors see the temporary page on the public site and on `/wp-admin/`; authorize your IP before opening the WordPress admin area.
 
 Even better you don't have to find out your IP and then save it on some sort of whitelist, you can simply add the string `wpok` to you url to automatically obtain the permission to see your website, without even knowing your IP!!!
 
