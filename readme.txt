@@ -44,7 +44,7 @@ To allow the access to your website from your internet connection add the string
 
 * `http://www.your-site.com?wpok`
 
-To remove your exact IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string `?wpko` to the website URL, like this. Wildcard rules must be edited manually:
+Wildcard rules must be edited manually. To remove your exact IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string `?wpko` to the website URL, like this:
 
 * `http://www.your-site.com?wpko`
 
