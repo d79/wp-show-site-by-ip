@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="wrap wssbi-settings-page">
 
 	<h2><?php _e('Show Site by IP', 'wp-show-site-by-ip'); ?></h2>
 

@@ -163,6 +163,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 .cmn-switch {
 	display: inline-block;
 	vertical-align: middle;
+	float: initial !important;
 }
 .cmn-switch + p {
 	display: inline-block;
