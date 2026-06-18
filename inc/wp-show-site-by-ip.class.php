@@ -99,7 +99,7 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
             'forget_old_html_nonce' => wp_create_nonce( 'wssbi_forget_old_html' )
 			) );
 			wp_enqueue_style( 'wssbi-main', URL . 'css/main.css', VER );
-			wp_enqueue_script( 'ace-editor', URL . 'lib/ace-1.2.5/src-min-noconflict/ace.js', '1.2.5' );
+			wp_enqueue_script( 'ace-editor', URL . 'lib/ace-1.44.0/src-min-noconflict/ace.js', '1.44.0' );
 			wp_enqueue_script( 'tlite', URL . 'lib/tlite-0.0.5/tlite.min.js', '0.0.5' );
 			// help pointer
 			require DIR . 'inc/help-pointer.php';
