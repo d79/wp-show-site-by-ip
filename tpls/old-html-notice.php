@@ -1,5 +1,5 @@
 <tr>
-	<td>	
+	<td>
 		<div id="wssbi-old-html-notice">
 			<?php _e('The temporary page editor has changed.', 'wp-show-site-by-ip'); ?>
 			&nbsp;

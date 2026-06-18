@@ -5,6 +5,7 @@
 
 .distignore
 .gitignore
+.gitattributes
 AGENTS.md
 PROJECT.md
 docs/
