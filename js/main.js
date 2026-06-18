@@ -84,12 +84,34 @@ jQuery(document).ready(function($){
 		window.wssbi_form_changed = true;
 	});
 
+	const editor3 = ace.edit("wssbi_url_whitelist");
+	editor3.setTheme("ace/theme/tomorrow");
+	editor3.getSession().setMode("ace/mode/html");
+	editor3.getSession().setUseWorker(false);
+	editor3.setHighlightActiveLine(false);
+	editor3.getSession().setUseWrapMode(true);
+	editor3.setShowPrintMargin(false);
+	const textarea3 = $('#wssbi_url_whitelist_textarea');
+	editor3.getSession().setValue(textarea3.val());
+	editor3.getSession().on('change', function(){
+		textarea3.val(editor3.getSession().getValue());
+	});
+	editor3.on("change", function() {
+		window.wssbi_form_changed = true;
+	});
+
 	/* DELETE OLD HTML */
 	$('#wssbi-old-html-notice .forget').click(function() {
 		if( confirm(wssbiL10n.confirm_forget) ) {
-			$.post(wssbiL10n.ajax_url, { 'action': 'wssbi_forget_old_html' });
-			$('#wssbi-old-html-notice').fadeOut('slow', function() {
-				$(this).closest('tr').remove();
+			$.post(wssbiL10n.ajax_url, {
+				'action': 'wssbi_forget_old_html',
+				'nonce': wssbiL10n.forget_old_html_nonce
+			}).done(function(response) {
+				if(response && response.success) {
+					$('#wssbi-old-html-notice').fadeOut('slow', function() {
+						$(this).closest('tr').remove();
+					});
+				}
 			});
 		}
 	});

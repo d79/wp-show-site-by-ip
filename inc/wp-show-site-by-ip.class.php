@@ -75,7 +75,8 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 			wp_localize_script( 'wssbi-main', 'wssbiL10n', array(
 				'saveAlert' => __( 'The changes you made will be lost if you navigate away from this page.', 'wp-show-site-by-ip' ),
             'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'confirm_forget' => __( 'Are you sure? The code will be definitely deleted', 'wp-show-site-by-ip' )
+            'confirm_forget' => __( 'Are you sure? The code will be definitely deleted', 'wp-show-site-by-ip' ),
+            'forget_old_html_nonce' => wp_create_nonce( 'wssbi_forget_old_html' )
 			) );
 			wp_enqueue_style( 'wssbi-main', URL . 'css/main.css', VER );
 			wp_enqueue_script( 'ace-editor', URL . 'lib/ace-1.2.5/src-min-noconflict/ace.js', '1.2.5' );
@@ -239,7 +240,14 @@ if ( ! class_exists( 'WP_Show_Site_by_IP' ) )
 		}
 
 		function forget() {
+			if( ! current_user_can( apply_filters( 'wssbi_manage_options', 'manage_options' ) ) ) {
+				wp_send_json_error();
+			}
+			if( ! check_ajax_referer( 'wssbi_forget_old_html', 'nonce', false ) ) {
+				wp_send_json_error();
+			}
 			delete_option( 'wssbi_html_old' );
+			wp_send_json_success();
 		}
 
 		function sanitize_ip_rules( $list ) {

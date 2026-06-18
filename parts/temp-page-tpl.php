@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?php echo $title; ?></title>
+	<title><?php echo esc_html( $title ); ?></title>
 	<?php echo $head; ?>
 </head>
 <body>

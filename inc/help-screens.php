@@ -41,7 +41,7 @@ $screen->add_help_tab( array(
 		__( "The IP whitelist accepts one rule per line, supports comment lines starting with <code>#</code>, and also accepts loopback addresses such as <code>127.0.0.1</code> and <code>::1</code>.", 'wp-show-site-by-ip' ),
 		__( "You can also add URL whitelist strings: when the current request URL contains one of them, the website is shown for that request without saving the visitor IP.", 'wp-show-site-by-ip' ),
 		__( "To allow access to your website from an internet connection add the string <code>?wpok</code> to the website URL, like this:", 'wp-show-site-by-ip' ),
-		__( "To remove your IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string <code>?wpko</code> to the website URL, like this:", 'wp-show-site-by-ip' ),
+		__( "To remove your exact IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string <code>?wpko</code> to the website URL, like this. Wildcard rules must be edited manually:", 'wp-show-site-by-ip' ),
 		__( "That's it. 🙂", 'wp-show-site-by-ip' )
 	)
 ));
@@ -65,7 +65,7 @@ $screen->add_help_tab( array(
 		</p>
 		<p>
 			<strong>'.__('String KO', 'wp-show-site-by-ip').'</strong><br>
-			'.__("It's the string this plugin will look for in the URL to deny access to the website: if found, the IP from which the user is connecting will be removed from the whitelist, and then the temporary page will be shown.", 'wp-show-site-by-ip').'
+			'.__("It's the string this plugin will look for in the URL to deny access to the website: if found, the exact IP from which the user is connecting will be removed from the whitelist, and then the temporary page will be shown. Wildcard rules must be edited manually.", 'wp-show-site-by-ip').'
 		</p>
 		<p>
 			<strong>'.__('Page title', 'wp-show-site-by-ip').'</strong><br>

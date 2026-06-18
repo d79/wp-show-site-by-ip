@@ -13,11 +13,15 @@ abbr {
 	border-bottom: 1px dotted #666;
 }
 
-#wssbi_head_wrap {
+#wssbi_head_wrap,
+#wssbi_iplist_wrap,
+#wssbi_url_whitelist_wrap {
 	position: relative;
 	height: 300px;
 }
-#wssbi_head {
+#wssbi_head,
+#wssbi_iplist,
+#wssbi_url_whitelist {
 	position: absolute;
 	top: 0; bottom: 0;
 	left: 0; right: 0;
