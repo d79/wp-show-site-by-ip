@@ -28,6 +28,8 @@ That makes it easier to work on your website from many different places (e.g. if
 After installed this plugin, you'll find the submenu *Show Site by IP* on your website Dashboard, under the *Tools* menu.
 That link open the plugin configuration page, where you can upload the full HTML of your temporary page and, when you are good to go, enable the IP filter.
 
+The temporary page fields can contain custom HTML, CSS and JavaScript, so they should be edited only by trusted administrators.
+
 **Your IP will be automatically added to the whitelist in order for you to continue to use your website.**
 
 The whitelist accepts one rule per line and supports IPv4, IPv6 and full-segment wildcards such as `123.123.123.*` or `2001:db8:*:*:*:*:*:*`.
@@ -43,6 +45,8 @@ You can also configure a URL whitelist made of one string per line: when the cur
 To allow the access to your website from your internet connection add the string `?wpok` to the website URL, like this:
 
 * `http://www.your-site.com?wpok`
+
+The default `wpok` string is convenient but predictable. For better privacy, customize it in the plugin settings.
 
 Wildcard rules must be edited manually. To remove your exact IP from the whitelist afterwards (and then go back to see the temporary page instead of your website) add the string `?wpko` to the website URL, like this:
 

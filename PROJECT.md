@@ -50,6 +50,8 @@ Il controllo pubblico avviene in `WP_Show_Site_by_IP::check()`, registrato su `p
 
 Prima di mostrare la pagina temporanea, il plugin esclude richieste amministrative e tecniche tramite `should_bypass_filter()`, compresi admin, Ajax, cron, REST API, sitemap, asset statici e alcuni file noti come `robots.txt`.
 
+La stringa OK predefinita `wpok` viene mantenuta per compatibilita, ma e prevedibile. Il plugin mostra un avviso admin non bloccante quando resta invariata, invitando a personalizzarla.
+
 ## Whitelist IP
 
 La whitelist IP accetta una regola per riga. Le righe vuote e quelle che iniziano con `#` vengono ignorate. Sono supportati IPv4, IPv6, loopback e wildcard a segmento intero, per esempio `123.123.123.*` o `2001:db8:*:*:*:*:*:*`.
@@ -59,6 +61,20 @@ La normalizzazione e il matching sono gestiti dalla classe principale con metodi
 ## Whitelist URL
 
 La whitelist URL contiene una stringa per riga. Se la request URI contiene una delle stringhe configurate, il filtro viene bypassato solo per quella richiesta e l'IP del visitatore non viene salvato.
+
+## Sicurezza e compatibilita
+
+Il contenuto `head` e `body` della pagina temporanea e HTML fidato: puo includere markup, CSS e JavaScript e viene pensato per amministratori affidabili. Abbassare la capability tramite `wssbi_manage_options` puo quindi esporre il sito a utenti meno fidati.
+
+I bypass tecnici privilegiano compatibilita con WordPress, WooCommerce, REST API, sitemap, asset statici e challenge `.well-known/acme-challenge/`. I default sono volutamente permissivi per evitare rotture operative quando il filtro IP e attivo.
+
+I bypass sono estendibili tramite filtri dedicati:
+
+- `wssbi_bypass_exact_paths`
+- `wssbi_bypass_path_prefixes`
+- `wssbi_bypass_path_patterns`
+- `wssbi_bypass_static_extensions`
+- `wssbi_should_bypass_filter`
 
 ## Admin UI
 
@@ -79,6 +95,11 @@ Il body della pagina temporanea usa `wp_editor()`. Head e lista IP usano Ace edi
 - `wssbi_show_temp_page`: modifica la decisione finale di mostrare la pagina temporanea.
 - `wssbi_ip_rules`: filtra le regole IP dopo sanitizzazione.
 - `wssbi_ip_rule_matches`: filtra il risultato del matching tra IP e regola.
+- `wssbi_bypass_exact_paths`: filtra i path esatti sempre bypassati.
+- `wssbi_bypass_path_prefixes`: filtra i prefissi di path bypassati.
+- `wssbi_bypass_path_patterns`: filtra i pattern regex di path bypassati.
+- `wssbi_bypass_static_extensions`: filtra le estensioni statiche bypassate.
+- `wssbi_should_bypass_filter`: modifica la decisione finale dei bypass tecnici.
 
 ## Endpoint e shortcode
 
